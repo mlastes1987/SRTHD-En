@@ -6,12 +6,12 @@ import argparse
 import hashlib
 import json
 import shutil
-import struct
 from pathlib import Path
 from PIL import Image
 from cpk import Cpk, crilayla_decompress
 from vita_gxt import encode, decode, encode_region
 from vita_text import build
+from vita_ui import MENU_REGIONS,team_banner
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -48,7 +48,10 @@ def main():
     art={118:'title_menu_faithful_native.png',
          119:'super_robot_wars_title_texture_single_line.png',
          138:'level_up_atlas_138.png'}
-    if not args.basic:art[133]='bonus_allocation_atlas_133.png'
+    if not args.basic:
+        art[133]='vita_menu_headers_133.png'
+        art[135]='vita_battle_headers_135.png'
+        art[138]='vita_level_up_atlas_138.png'
     replacements={}
     preview=args.work/'ui_preview';preview.mkdir(exist_ok=True)
     for fid,name in art.items():
@@ -56,20 +59,19 @@ def main():
         raw=archive.payload(row)
         if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
         with Image.open(args.art/name) as im:
-            replacements[fid]=(encode_region(raw,im.crop((0,128,512,192)),(0,128,512,192))
-                               if fid==133 else encode(raw,im))
+            if fid==133:
+                if im.size!=decode(raw).size:raise ValueError('Menu atlas dimensions changed')
+                packed=raw
+                for box in MENU_REGIONS:
+                    packed=encode_region(packed,im.crop(box),box,use_region_palette=True)
+                replacements[fid]=packed
+            else:replacements[fid]=encode(raw,im)
         decode(replacements[fid]).save(preview/f'{fid:05}.png')
     if not args.basic:
         row=next(r for r in archive.files if int(r['FileName'])==32)
         raw=archive.payload(row)
         if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
-        raw=bytearray(raw)
-        # Vita and PS3 originals have byte-identical team-selection SSAD panes.
-        # Apply only the two properties verified in the PS3 banner fix.
-        for off,before,after in ((0xce4,219000,271000),(0x10e8,1000,0)):
-            if struct.unpack_from('<I',raw,off)[0]!=before:raise ValueError('Team banner source changed')
-            struct.pack_into('<I',raw,off,after)
-        replacements[32]=bytes(raw)
+        replacements[32]=team_banner(raw)
     output_archive=args.output/'KDataVITA.cpk'
     archive.rebuild(replacements,str(output_archive))
     built=Cpk(str(output_archive))

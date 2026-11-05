@@ -92,6 +92,16 @@ class TextureSafety(unittest.TestCase):
                     if not (2<=x<4 and 1<=y<3):
                         self.assertEqual(after.getpixel((x,y)),before.getpixel((x,y)))
             self.assertEqual(after.getpixel((2,1))[3],0)
+        # A dark frame color elsewhere in the palette must not enter white text.
+        native=bytearray(self.fixture(0x60000000))
+        native[64:96]=bytes([1])*32
+        native[96+4:96+8]=bytes([255,255,255,255])
+        native[96+8:96+12]=bytes([0,40,100,255])
+        target=Image.new('RGBA',(2,2),(0,40,100,255))
+        unrestricted=encode_region(bytes(native),target,(2,1,4,3))
+        restricted=encode_region(bytes(native),target,(2,1,4,3),use_region_palette=True)
+        self.assertEqual(decode(unrestricted).getpixel((2,1)),(0,40,100,255))
+        self.assertEqual(decode(restricted).getpixel((2,1)),(255,255,255,255))
 
 
     def test_palette_alpha_and_layout_roundtrip(self):

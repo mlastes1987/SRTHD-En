@@ -6,10 +6,33 @@ releases, so it is summarized under the first packaged preview rather than
 assigned invented version numbers.
 
 Current previews: **PS3 0.1.1-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.1-vita-preview** (PCSG00260). Test builds and feedback are coordinated
+**Vita 0.1.2-vita-preview** (PCSG00260). Test builds and feedback are coordinated
 through [Discord](https://discord.gg/DwR2jxj5b). Both remain work in progress;
 the latest Vita runtime changes and hardware rePatch compatibility need
 in-game confirmation.
+
+## Vita 0.1.2-vita-preview — 2026-11-04
+
+- Translated Select Hero, Select Team, and deployment's Select Units headings
+  with bold italic white/cyan sprites. Extended the requested Bonus heading
+  to Bonus Allocation.
+- Updated all four menu atlas regions using colors from each original region,
+  avoiding dark frame colors in the lettering glow. Other atlas pixels and
+  the full native palette remain unchanged.
+- Enlarged the narrow team sprite uniformly to 160%, retained its centered
+  placement, and kept the duplicated shared selection suffix hidden. The
+  SSAD edits now use named properties with exact source-value guards.
+- Rebuilt the Objectives sprite on the native gray gradient strip with
+  lettering inside its 240 × 80 sampled rectangle. Removed the mismatched
+  embedded frame that caused a seam at the banner's bottom.
+- Translated both red/blue variants of Attack and Counter, plus the same
+  atlas's Quick Command and System banners, preserving their native slots.
+- Removed a line break from the map-save introduction so it no longer extends
+  into the separate Create a new save? row.
+- Verified all six modified CPK entries and 156 unchanged stored payloads;
+  all 30 Vita tests pass. Rebuilt the Vita 0.1.2 rePatch playtest ZIP.
+- These screen changes require in-game visual confirmation. Hardware rePatch
+  compatibility and multi-unit attack paging remain unconfirmed.
 
 ## Vita 0.1.1-vita-preview — 2026-11-04
 

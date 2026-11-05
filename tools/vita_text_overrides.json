@@ -96,8 +96,8 @@
   },
   "0x122f20": {
     "japanese": "ここまでのマップ上の進行状況をセーブします。",
-    "english": "Saving progress on\n　this map.",
-    "reason": "PS3 neighboring literal sequence; score 13"
+    "english": "Saving progress on this map.",
+    "reason": "Save confirmation has two fixed single-line native rows; do not wrap the first into the question row"
   },
   "0x1232e4": {
     "japanese": "フルアーマーガンダム",

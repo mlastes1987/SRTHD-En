@@ -67,8 +67,12 @@ def encode(original, image):
     return bytes(data)
 
 
-def encode_region(original, image, box):
-    """Replace one atlas region using its existing palette; preserve all else."""
+def encode_region(original, image, box, use_region_palette=False):
+    """Replace one region; optionally restrict colors to its original indices.
+
+    Region-only matching prevents unrelated frame colors from entering text
+    glows. Both modes preserve all palette bytes and pixels outside the box.
+    """
     off, size, pal, layout, width, height = metadata(original)
     left, top, right, bottom = box
     if not (0 <= left < right <= width and 0 <= top < bottom <= height):
@@ -80,15 +84,17 @@ def encode_region(original, image, box):
     def premult(c):
         return tuple(v*c[3]/255 for v in c[:3]) + (c[3],)
     palette = [premult(c) for c in colors]
+    order = positions(width, height, layout)
+    allowed = sorted({original[off+order[y*width+x]]
+                      for y in range(top,bottom) for x in range(left,right)}) if use_region_palette else range(256)
     cache = {}
     data = bytearray(original)
-    order = positions(width, height, layout)
     for y in range(top, bottom):
         for x in range(left, right):
             color = image.getpixel((x-left,y-top))
             if color not in cache:
                 target = premult(color)
-                cache[color] = min(range(256), key=lambda i:
+                cache[color] = min(allowed, key=lambda i:
                     sum((a-b)**2 for a,b in zip(target,palette[i])))
             data[off+order[y*width+x]] = cache[color]
     return bytes(data)

@@ -29,17 +29,22 @@ four-line, 800-pixel, and native-buffer byte limits.
 The team-selection banner's two corrected SSAD properties are included. The
 Vita and PS3 source panes were byte-identical. English title logo, title-menu
 options, Objectives, and Level Up! graphics are retained. The bonus heading
-now reads **Bonus**. Its confirmation uses two single-line rows with all six
+now reads **Bonus Allocation**. Its confirmation uses two single-line rows with all six
 stat values, removing inherited line breaks that overlapped the Yes/No controls.
-The Bonus atlas row uses the original palette; all other rows stay identical.
+Select Hero, Select Team, and Select Units are translated too. Only their
+reviewed menu regions are changed, using each original region's palette colors.
+The team label is centered at 160% uniform scale, with its shared suffix hidden.
+Both colors of Attack/Counter and Quick Command/System are translated. The
+Objectives text uses the native gray strip without an embedded second frame.
+The map-save introduction stays on its own single native row.
 
-Validation: **27 Vita tests pass**, including execution of the ARM hooks in
+Validation: **30 Vita tests pass**, including execution of the ARM hooks in
 Unicorn. Two additional common archive tests check replacement-ID collisions.
 The binary verifier checks all translations, 289 table-pointer updates,
 51 instruction-address pairs, 12 branch hooks, the centered wrapper, original
 BSS zero initialization, and the untouched SCE comment segment. Every changed
-byte in the original loaded segments is accounted for. The UI CPK has five
-verified replacements and 157 byte-identical untouched stored payloads.
+byte in the original loaded segments is accounted for. The UI CPK has six
+verified replacements and 156 byte-identical untouched stored payloads.
 
 This build is installed for Vita3K testing, with original backups preserved.
 The new runtime behavior has not yet been checked in-game. Test long attacking
@@ -71,8 +76,12 @@ python tools/vita_verify.py --source local/vita/eboot.original.self
 
 The build needs `work/text/translation.csv` and these approved artwork files in
 `work/ui_edit`: `title_menu_faithful_native.png`,
-`super_robot_wars_title_texture_single_line.png`, `level_up_atlas_138.png`, and `bonus_allocation_atlas_133.png` (512 × 992).
-Only the Bonus row `(0, 128, 512, 192)` is imported from the latter atlas.
+`super_robot_wars_title_texture_single_line.png`, `vita_menu_headers_133.png`
+(512 × 992), `vita_battle_headers_135.png` (512 × 336), and
+`vita_level_up_atlas_138.png` (512 × 512). The menu atlas imports only the four
+regions listed in `tools/vita_ui.py`; unchanged pixels and palette bytes remain
+identical. `--basic` instead uses the historical `level_up_atlas_138.png` and
+omits these later banner changes.
 Install the Python dependencies with `python -m pip install -r requirements-vita.txt`.
 The runtime build also requires an ARM-capable clang, ld.lld, and llvm-objcopy
 on PATH or beside clang. Runtime instruction tests require Unicorn; they skip
@@ -94,10 +103,10 @@ fix are enabled by default. Use `--basic` to reproduce the initial build.
 After a verified build, run:
 
 ```powershell
-python tools/vita_release.py --version 0.1.1-vita-preview
+python tools/vita_release.py --version 0.1.2-vita-preview
 ```
 
-The output folder is `release/SRW-HD-Vita-PCSG00260-English-0.1.1-vita-preview-rePatch/`.
+The output folder is `release/SRW-HD-Vita-PCSG00260-English-0.1.2-vita-preview-rePatch/`.
 It contains `rePatch/PCSG00260/eboot.bin`,
 `rePatch/PCSG00260/DATA/kurodata/KDataVITA.cpk`, player instructions,
 an installable manifest with package-relative paths, and `SHA256SUMS.txt`.

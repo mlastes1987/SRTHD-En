@@ -444,7 +444,7 @@ SELF** action; these tools do not supply game files or keys.
 & $py -m unittest discover -s tools -p 'test_vita*.py' -v
 & $py tools/vita_build.py --game local/vita/original --self local/vita/eboot.original.self
 & $py tools/vita_verify.py --source local/vita/eboot.original.self
-& $py tools/vita_release.py --version 0.1.1-vita-preview
+& $py tools/vita_release.py --version 0.1.2-vita-preview
 ```
 
 Provide an ARM-capable clang with ld.lld and llvm-objcopy on PATH or beside
@@ -562,5 +562,9 @@ hosts the current test build.
 `vita_gxt.encode_region(original, image, box)` replaces a rectangular P8
 region using the original 256-color palette. `image` must match the box size;
 coordinates are left, top, right, bottom. Palette, metadata, and pixels outside
-the region are preserved. The Vita builder uses it for the Bonus heading in
-entry 133 at `(0, 128, 512, 192)`, avoiding changes to adjacent Japanese headings.
+the region are preserved. The Vita builder uses it for the four reviewed menu-heading regions in
+entry 133, listed in `vita_ui.MENU_REGIONS`. `use_region_palette=True` restricts
+color matching to the original colors used in that region, keeping dark frame
+colors out of cyan glows. The original palette and all outside pixels remain
+unchanged. `vita_ui.team_banner` applies checked, named SSAD changes for a
+centered, uniformly enlarged team label without the duplicated suffix.
