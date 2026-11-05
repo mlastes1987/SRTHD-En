@@ -1,0 +1,33 @@
+name: Test-build bug report
+description: Report translation, text layout, paging, installer or gameplay problems.
+title: "[Test build] "
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for testing! Current builds are available at https://discord.gg/DwR2jxj5b. Please do not attach game files or license keys."
+  - type: input
+    id: build
+    attributes:
+      label: Test-build version
+    validations:
+      required: true
+  - type: input
+    id: emulator
+    attributes:
+      label: RPCS3 version and operating system
+    validations:
+      required: true
+  - type: textarea
+    id: location
+    attributes:
+      label: Episode, unit, attack or menu
+      description: Include the exact dialogue or menu option if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: What happened and how to reproduce it
+      description: Explain what you expected and what appeared instead. Attach screenshots here if useful.
+    validations:
+      required: true
