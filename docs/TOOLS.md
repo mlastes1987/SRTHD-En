@@ -444,7 +444,7 @@ SELF** action; these tools do not supply game files or keys.
 & $py -m unittest discover -s tools -p 'test_vita*.py' -v
 & $py tools/vita_build.py --game local/vita/original --self local/vita/eboot.original.self
 & $py tools/vita_verify.py --source local/vita/eboot.original.self
-& $py tools/vita_release.py --version 0.1.0-vita-preview
+& $py tools/vita_release.py --version 0.1.1-vita-preview
 ```
 
 Provide an ARM-capable clang with ld.lld and llvm-objcopy on PATH or beside
@@ -556,3 +556,11 @@ Report runtime issues with the build and RPCS3 versions, episode, unit/attack or
 menu, reproduction steps, and screenshots. The [changelog](../CHANGELOG.md)
 records current validation limits; [Discord](https://discord.gg/DwR2jxj5b)
 hosts the current test build.
+
+### Vita atlas region replacement
+
+`vita_gxt.encode_region(original, image, box)` replaces a rectangular P8
+region using the original 256-color palette. `image` must match the box size;
+coordinates are left, top, right, bottom. Palette, metadata, and pixels outside
+the region are preserved. The Vita builder uses it for the Bonus heading in
+entry 133 at `(0, 128, 512, 192)`, avoiding changes to adjacent Japanese headings.

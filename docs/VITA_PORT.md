@@ -28,15 +28,18 @@ four-line, 800-pixel, and native-buffer byte limits.
 
 The team-selection banner's two corrected SSAD properties are included. The
 Vita and PS3 source panes were byte-identical. English title logo, title-menu
-options, Objectives, and Level Up! graphics are retained.
+options, Objectives, and Level Up! graphics are retained. The bonus heading
+now reads **Bonus**. Its confirmation uses two single-line rows with all six
+stat values, removing inherited line breaks that overlapped the Yes/No controls.
+The Bonus atlas row uses the original palette; all other rows stay identical.
 
-Validation: **25 Vita tests pass**, including execution of the ARM hooks in
+Validation: **27 Vita tests pass**, including execution of the ARM hooks in
 Unicorn. Two additional common archive tests check replacement-ID collisions.
 The binary verifier checks all translations, 289 table-pointer updates,
 51 instruction-address pairs, 12 branch hooks, the centered wrapper, original
 BSS zero initialization, and the untouched SCE comment segment. Every changed
-byte in the original loaded segments is accounted for. The UI CPK has four
-verified replacements and 158 byte-identical untouched stored payloads.
+byte in the original loaded segments is accounted for. The UI CPK has five
+verified replacements and 157 byte-identical untouched stored payloads.
 
 This build is installed for Vita3K testing, with original backups preserved.
 The new runtime behavior has not yet been checked in-game. Test long attacking
@@ -68,7 +71,8 @@ python tools/vita_verify.py --source local/vita/eboot.original.self
 
 The build needs `work/text/translation.csv` and these approved artwork files in
 `work/ui_edit`: `title_menu_faithful_native.png`,
-`super_robot_wars_title_texture_single_line.png`, and `level_up_atlas_138.png`.
+`super_robot_wars_title_texture_single_line.png`, `level_up_atlas_138.png`, and `bonus_allocation_atlas_133.png` (512 × 992).
+Only the Bonus row `(0, 128, 512, 192)` is imported from the latter atlas.
 Install the Python dependencies with `python -m pip install -r requirements-vita.txt`.
 The runtime build also requires an ARM-capable clang, ld.lld, and llvm-objcopy
 on PATH or beside clang. Runtime instruction tests require Unicorn; they skip
@@ -90,10 +94,10 @@ fix are enabled by default. Use `--basic` to reproduce the initial build.
 After a verified build, run:
 
 ```powershell
-python tools/vita_release.py --version 0.1.0-vita-preview
+python tools/vita_release.py --version 0.1.1-vita-preview
 ```
 
-The output folder is `release/SRW-HD-Vita-PCSG00260-English-0.1.0-vita-preview-rePatch/`.
+The output folder is `release/SRW-HD-Vita-PCSG00260-English-0.1.1-vita-preview-rePatch/`.
 It contains `rePatch/PCSG00260/eboot.bin`,
 `rePatch/PCSG00260/DATA/kurodata/KDataVITA.cpk`, player instructions,
 an installable manifest with package-relative paths, and `SHA256SUMS.txt`.

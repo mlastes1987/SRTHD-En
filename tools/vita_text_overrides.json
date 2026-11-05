@@ -934,5 +934,15 @@
     "encoding": "cp932",
     "reason": "Vita-specific source literal or fixed terrain-name record",
     "inline_capacity": 16
+  },
+  "0x128ac8": {
+    "japanese": "ＨＰ＋%d、攻撃＋%d、防御＋%d、素早さ＋%d",
+    "english": "HP +%d, Atk +%d, Def +%d, Spd +%d",
+    "reason": "Bonus confirmation uses two fixed single-line native text rows; preserve all six values without wrapping"
+  },
+  "0x128b04": {
+    "japanese": "忠義＋%d、魅力＋%d　でよろしいですか？",
+    "english": "Loyalty +%d, Charm +%d. OK?",
+    "reason": "Bonus confirmation uses two fixed single-line native text rows; preserve all six values without wrapping"
   }
 }

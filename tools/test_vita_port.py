@@ -7,7 +7,8 @@ import tempfile
 import unittest
 from PIL import Image
 from vita_text import build, segments
-from vita_gxt import decode, encode, positions
+from vita_gxt import decode, encode, encode_region, positions
+import json
 
 
 def self_fixture():
@@ -79,6 +80,20 @@ class TextureSafety(unittest.TestCase):
         self.assertEqual(sorted(positions(8,4,0)),list(range(32)))
         self.assertEqual(sorted(positions(4,8,0)),list(range(32)))
 
+    def test_region_preserves_palette_and_other_pixels(self):
+        for layout in (0,0x60000000):
+            original=encode(self.fixture(layout),Image.new('RGBA',(8,4),(255,255,255,255)))
+            packed=encode_region(original,Image.new('RGBA',(2,2),(0,0,0,0)),(2,1,4,3))
+            before=decode(original);after=decode(packed)
+            self.assertEqual(packed[-1024:],original[-1024:])
+            self.assertEqual(packed[:64],original[:64])
+            for y in range(4):
+                for x in range(8):
+                    if not (2<=x<4 and 1<=y<3):
+                        self.assertEqual(after.getpixel((x,y)),before.getpixel((x,y)))
+            self.assertEqual(after.getpixel((2,1))[3],0)
+
+
     def test_palette_alpha_and_layout_roundtrip(self):
         im=Image.new('RGBA',(8,4))
         im.putdata([(255,0,0,255) if x%2 else (0,80,255,0) for x in range(32)])
@@ -87,6 +102,19 @@ class TextureSafety(unittest.TestCase):
             packed=encode(original,im)
             self.assertEqual(packed[:64],original[:64])
             self.assertEqual(decode(packed).tobytes(),im.tobytes())
+
+
+class BonusLayout(unittest.TestCase):
+    def test_two_native_rows_keep_six_values_without_line_breaks(self):
+        root=Path(__file__).parent
+        overrides=json.loads((root/'vita_text_overrides.json').read_text(encoding='utf8'))
+        metrics=json.loads((root/'vita_font_metrics.json').read_text())
+        for address,count in [('0x128ac8',4),('0x128b04',2)]:
+            text=overrides[address]['english']
+            self.assertEqual(text.count('%d'),count)
+            self.assertNotIn('\n',text)
+            self.assertLessEqual(sum(int(metrics[c]['advance']*38+metrics[c].get('adjust_px',0))
+                                     for c in text % tuple([99]*count)),800)
 
 
 if __name__=='__main__':unittest.main()

@@ -1,7 +1,6 @@
-"""Build and verify PCSG00260 English text/UI, spacing, and paging.
+"""Build the PCSG00260 English text/UI preview; never modifies an emulator install.
 
 python tools/vita_build.py --game local/vita/original --self local/vita/eboot.original.self
-The build stages outputs without modifying an installed game.
 """
 import argparse
 import hashlib
@@ -11,7 +10,7 @@ import struct
 from pathlib import Path
 from PIL import Image
 from cpk import Cpk, crilayla_decompress
-from vita_gxt import encode, decode
+from vita_gxt import encode, decode, encode_region
 from vita_text import build
 
 
@@ -49,13 +48,16 @@ def main():
     art={118:'title_menu_faithful_native.png',
          119:'super_robot_wars_title_texture_single_line.png',
          138:'level_up_atlas_138.png'}
+    if not args.basic:art[133]='bonus_allocation_atlas_133.png'
     replacements={}
     preview=args.work/'ui_preview';preview.mkdir(exist_ok=True)
     for fid,name in art.items():
         row=next(r for r in archive.files if int(r['FileName'])==fid)
         raw=archive.payload(row)
         if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
-        with Image.open(args.art/name) as im:replacements[fid]=encode(raw,im)
+        with Image.open(args.art/name) as im:
+            replacements[fid]=(encode_region(raw,im.crop((0,128,512,192)),(0,128,512,192))
+                               if fid==133 else encode(raw,im))
         decode(replacements[fid]).save(preview/f'{fid:05}.png')
     if not args.basic:
         row=next(r for r in archive.files if int(r['FileName'])==32)

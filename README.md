@@ -10,7 +10,7 @@ for test builds and feedback.**
 | Platform | Current preview | Playtest package |
 |---|---|---|
 | PS3 — NPJB00514 | **0.1.1-preview** | Windows RPCS3 patcher; `SRWT1-HD-English-0.1.1-preview.zip` |
-| Vita — PCSG00260 | **0.1.0-vita-preview** | Replacement files in a `rePatch/PCSG00260` folder; filename begins `SRW-HD-Vita-PCSG00260-English-` and ends `-rePatch.zip` |
+| Vita — PCSG00260 | **0.1.1-vita-preview** | Replacement files in a `rePatch/PCSG00260` folder; filename begins `SRW-HD-Vita-PCSG00260-English-` and ends `-rePatch.zip` |
 
 The Vita build has automated text, spacing, paging, and packaging checks. Its
 latest runtime changes still need in-game confirmation, especially multi-unit
@@ -37,6 +37,7 @@ occurrences**, including 216 moved to added space rather than shortened. It adds
 - Two-page attack/counter dialogue support and native fast-forward timing.
 - Reviewed Vita save-data messages, terrain names, and ambiguous shared labels.
 - Allies/Enemies spacing and the team-selection banner correction.
+- A translated **Bonus** banner and compact bonus confirmation rows preserving all six stat values.
 - Native Vita GXT artwork conversion, build verification, checked Vita3K installation, and rePatch packaging tools.
 
 These are **work-in-progress test builds**. Passing checks does not mean every

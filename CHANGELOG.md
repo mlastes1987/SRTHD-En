@@ -6,10 +6,25 @@ releases, so it is summarized under the first packaged preview rather than
 assigned invented version numbers.
 
 Current previews: **PS3 0.1.1-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.0-vita-preview** (PCSG00260). Test builds and feedback are coordinated
+**Vita 0.1.1-vita-preview** (PCSG00260). Test builds and feedback are coordinated
 through [Discord](https://discord.gg/DwR2jxj5b). Both remain work in progress;
 the latest Vita runtime changes and hardware rePatch compatibility need
 in-game confirmation.
+
+## Vita 0.1.1-vita-preview — 2026-11-04
+
+- Replaced the Japanese bonus-allocation heading with **Bonus**, retaining
+  bold italic white lettering and a cyan glow in the native 512 × 64 atlas row.
+- Added region-only P8 encoding using the existing palette. All other rows,
+  palette bytes, and atlas metadata remain unchanged.
+- Removed inherited multiline formatting from the bonus confirmation's two
+  fixed native text rows. Compact Atk/Def/Spd labels keep all six `%d` values
+  on two single-line rows, clear of the Yes/No options. Width checks cover
+  two-digit values at the native 38-pixel font size.
+- Verified five CPK replacements and 157 unchanged stored payloads. All 27
+  Vita tests pass, including new region-preservation and confirmation tests.
+- Rebuilt the separate Vita rePatch playtest ZIP. These two screen fixes
+  still need in-game visual confirmation; hardware remains unverified.
 
 ## Vita 0.1.0-vita-preview — 2026-11-04
 

@@ -67,6 +67,33 @@ def encode(original, image):
     return bytes(data)
 
 
+def encode_region(original, image, box):
+    """Replace one atlas region using its existing palette; preserve all else."""
+    off, size, pal, layout, width, height = metadata(original)
+    left, top, right, bottom = box
+    if not (0 <= left < right <= width and 0 <= top < bottom <= height):
+        raise ValueError('Region outside texture')
+    image = image.convert('RGBA')
+    if image.size != (right-left, bottom-top):
+        raise ValueError('Replacement dimensions must match region')
+    colors = [tuple(original[pal+i*4:pal+i*4+4]) for i in range(256)]
+    def premult(c):
+        return tuple(v*c[3]/255 for v in c[:3]) + (c[3],)
+    palette = [premult(c) for c in colors]
+    cache = {}
+    data = bytearray(original)
+    order = positions(width, height, layout)
+    for y in range(top, bottom):
+        for x in range(left, right):
+            color = image.getpixel((x-left,y-top))
+            if color not in cache:
+                target = premult(color)
+                cache[color] = min(range(256), key=lambda i:
+                    sum((a-b)**2 for a,b in zip(target,palette[i])))
+            data[off+order[y*width+x]] = cache[color]
+    return bytes(data)
+
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('mode', choices=['decode','encode'])
