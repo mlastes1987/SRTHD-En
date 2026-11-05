@@ -1,5 +1,9 @@
 # Building a patch-only release
 
+See the [tool usage guide](TOOLS.md#package-and-test-an-installer) for command
+examples and the [changelog](../CHANGELOG.md) for the contents and validation
+status of each preview.
+
 This pipeline is for the maintainer's local build workspace. Players get the
 current test build on [Discord](https://discord.gg/DwR2jxj5b) and use the
 included Windows patcher; Python is not needed by players.

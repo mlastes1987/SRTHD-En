@@ -59,7 +59,7 @@ Please include the test-build version, RPCS3 version, episode, unit/attack or me
 
 This repository contains **tools, source, documentation, and screenshots**. It does not include the game, complete patched executables or archives, license keys, saves, or a bundled emulator. **Current test builds are available through [Discord](https://discord.gg/DwR2jxj5b).**
 
-Developers can start with [the development guide](docs/DEVELOPMENT.md) and [the release pipeline](docs/PATCHING_PIPELINE.md). The working translation tables, extracted assets, and finished artwork archives are maintainer-local inputs; a clean clone is a tools checkout, not a complete translation build workspace.
+Start with the [tool usage guide](docs/TOOLS.md) for step-by-step commands, the [development guide](docs/DEVELOPMENT.md) for local setup, and the [release pipeline](docs/PATCHING_PIPELINE.md) for packaging. The [detailed changelog](CHANGELOG.md) records preview changes, earlier fixes, and remaining test coverage. The working translation tables, extracted assets, and finished artwork archives are maintainer-local inputs; a clean clone is a tools checkout, not a complete translation build workspace.
 
 ## Platform and license
 

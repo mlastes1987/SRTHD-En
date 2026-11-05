@@ -1,5 +1,9 @@
 # Working with the tools
 
+For complete command examples and a reference for every script, see the
+[tool usage guide](TOOLS.md). The [changelog](../CHANGELOG.md) explains what
+each preview changed and which runtime checks are still pending.
+
 The public repository is a tools/source checkout. It deliberately excludes
 original game files, extracted textures, working translation tables, final
 translated archives, and release payloads. Get the current playable test
