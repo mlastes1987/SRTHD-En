@@ -82,6 +82,8 @@ def main():
     ap.add_argument('--output',type=Path,default=ROOT/'release')
     ap.add_argument('--ui-archive',type=Path,default=ROOT/'build/KDATAPS3.translated.CPK')
     ap.add_argument('--unit-archive',type=Path,default=ROOT/'build/PIECE1STPS3.translated.CPK')
+    from title_version import FONT
+    ap.add_argument('--label-font',type=Path,default=FONT)
     args = ap.parse_args()
     import re
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,60}',args.version):
@@ -93,6 +95,10 @@ def main():
             ['-m','unittest','discover','-s','tools','-p','test_text_import.py'],
             [str(ROOT/'tools/verify_build.py')]):
         subprocess.run([sys.executable]+command,check=True,cwd=ROOT)
+    from title_version import archive as stamp_title
+    stamped_ui=ROOT/'build/KDATAPS3.title-version.CPK'
+    title_label=stamp_title(args.ui_archive,stamped_ui,'ps3',args.version,args.label_font,
+                           args.original/'USRDIR/DATA/KURODATA/KDATAPS3.CPK')
     folder = args.output/f'SRWT1-HD-English-{args.version}'
     if folder.exists():
         ap.error('Release folder exists; use a new version or output folder.')
@@ -101,7 +107,7 @@ def main():
     files = []
     for rel,target in (
             ('EBOOT.BIN',ROOT/'build/EBOOT.BIN'),
-            ('DATA/KURODATA/KDATAPS3.CPK',args.ui_archive),
+            ('DATA/KURODATA/KDATAPS3.CPK',stamped_ui),
             ('DATA/PIECE/PIECE1STPS3.CPK',args.unit_archive)):
         original = args.original/'USRDIR'/rel
         source_path = original.with_suffix('.elf') if rel=='EBOOT.BIN' else original
@@ -117,6 +123,7 @@ def main():
         print(f'{rel}: {len(translated):,} target bytes -> {len(patch):,} patch bytes')
     manifest = dict(format=1,title_id='NPJB00514',name='Super Robot Wars HD English',
                     version=args.version,channel='preview',files=files)
+    manifest['title_label']=title_label
     (folder/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
     shutil.copy2(ROOT/'installer/README.txt',folder/'README.txt')
     compiler = Path('C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe')

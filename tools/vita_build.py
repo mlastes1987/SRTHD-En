@@ -12,6 +12,7 @@ from cpk import Cpk, crilayla_decompress
 from vita_gxt import encode, decode, encode_region
 from vita_text import build
 from vita_ui import MENU_REGIONS,team_banner
+from title_version import current,texture,load_font,FONT,number
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -26,7 +27,10 @@ def main():
     ap.add_argument('--output',type=Path,default=Path('build/vita'))
     ap.add_argument('--work',type=Path,default=Path('work/vita'))
     ap.add_argument('--basic',action='store_true',help='Rebuild the initial in-place text/UI port only')
+    ap.add_argument('--version',default=current('vita'),help='Version baked into the title label and manifest')
+    ap.add_argument('--label-font',type=Path,default=FONT,help='Original GCM bitmap font from the shared PS3 workspace')
     args=ap.parse_args()
+    number(args.version)
     args.output.mkdir(parents=True,exist_ok=True)
     args.work.mkdir(parents=True,exist_ok=True)
     original=args.self_path.read_bytes()
@@ -68,6 +72,11 @@ def main():
             else:replacements[fid]=encode(raw,im)
         decode(replacements[fid]).save(preview/f'{fid:05}.png')
     if not args.basic:
+        row=next(r for r in archive.files if int(r['FileName'])==117)
+        raw=archive.payload(row)
+        if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
+        replacements[117],title_preview,title_label=texture(raw,'vita',args.version,load_font(args.label_font))
+        title_preview.save(preview/'title-version.png')
         row=next(r for r in archive.files if int(r['FileName'])==32)
         raw=archive.payload(row)
         if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
@@ -87,6 +96,7 @@ def main():
               'runtime_tested':False,'text_counts':report['counts'],
               'ui_entries':sorted(replacements),'files':[]}
     if not args.basic:manifest['runtime']=json.loads((args.work/'runtime_report.json').read_text())
+    if not args.basic:manifest['title_label']=title_label
     if not args.basic:
         from vita_verify import verify
         validation=verify(original,data,report,manifest['runtime'])

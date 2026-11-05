@@ -1,17 +1,17 @@
 # Vita playtest installation — PCSG00260
 
-Current Vita package: **0.1.2-vita-preview** for the Japanese **PCSG00260 v1.00**
+Current Vita package: **0.1.3-vita-preview** for the Japanese **PCSG00260 v1.00**
 game. Builds and feedback are coordinated through
 [Discord](https://discord.gg/DwR2jxj5b).
 
 The filename is:
 
 ```text
-SRW-HD-Vita-PCSG00260-English-0.1.2-vita-preview-rePatch.zip
+SRW-HD-Vita-PCSG00260-English-0.1.3-vita-preview-rePatch.zip
 ```
 
 This is a Vita replacement-file ZIP. The PS3 preview uses a separate Windows
-patcher package named `SRWT1-HD-English-0.1.1-preview.zip`.
+patcher package named `SRWT1-HD-English-0.1.2-preview.zip`.
 
 ## Package contents
 

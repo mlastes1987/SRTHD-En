@@ -42,6 +42,13 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaises(ValueError):package(self.manifest,'test',self.root/'release')
         self.assertFalse((self.root/'release').exists())
 
+    def test_title_and_package_versions_must_match(self):
+        data=json.loads(self.manifest.read_text());data['title_label']={'version':'0.1.3-vita-preview'}
+        self.manifest.write_text(json.dumps(data))
+        with self.assertRaisesRegex(ValueError,'title label'):
+            package(self.manifest,'0.1.4-vita-preview',self.root/'release')
+        self.assertFalse((self.root/'release').exists())
+
     def test_unexpected_file_or_unsafe_version_is_rejected(self):
         self.rows[1]['path']='sce_sys/param.sfo';self.save()
         with self.assertRaises(ValueError):package(self.manifest,'test',self.root/'release')

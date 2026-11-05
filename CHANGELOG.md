@@ -5,11 +5,29 @@ public tooling. Earlier development was not tagged as a sequence of public
 releases, so it is summarized under the first packaged preview rather than
 assigned invented version numbers.
 
-Current previews: **PS3 0.1.1-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.2-vita-preview** (PCSG00260). Test builds and feedback are coordinated
+Current previews: **PS3 0.1.2-preview** (NPJB00514 / RPCS3) and
+**Vita 0.1.3-vita-preview** (PCSG00260). Test builds and feedback are coordinated
 through [Discord](https://discord.gg/DwR2jxj5b). Both remain work in progress;
 the latest Vita runtime changes and hardware rePatch compatibility need
 in-game confirmation.
+
+## PS3 0.1.2-preview / Vita 0.1.3-vita-preview — 2026-11-05
+
+- Added a small white two-line title label: `pk87`, then `eng v0.1.2` on
+  PS3 or `eng v0.1.3` on Vita. It uses the game's bitmap glyphs, a dark outline,
+  right alignment, and roughly 48-pixel right / 44-pixel bottom insets.
+- Accounted for the title background's separate rotated right-hand tile,
+  keeping the lettering upright and clear of the logo and menu selections.
+- Added a reusable title-version tool, platform version defaults, exact
+  preservation checks outside the label rectangle, and tile-orientation tests.
+- PS3 release packaging stamps the supplied version onto a clean original
+  title background while retaining the other translated archive entries.
+  Vita builds stamp their version and packaging rejects a mismatched version.
+- Rebuilt and checked both packages. PS3 installer integration checks passed;
+  31 Vita tests and two title-label tests pass. Seven Vita archive entries are
+  replaced and the other 155 stored payloads remain identical.
+- Installed both builds with original backups retained. Title-label placement
+  still needs an in-game visual check; Vita hardware remains unverified.
 
 ## Vita 0.1.2-vita-preview — 2026-11-04
 

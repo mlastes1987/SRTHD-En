@@ -419,8 +419,8 @@ inspect the error before retrying; a partly prepared version folder may remain.
 Explicit integration tests, using an existing release folder:
 
 ```powershell
-& $py tools/test_release.py release/SRWT1-HD-English-0.1.1-preview
-& $py tools/test_release_decrypt.py release/SRWT1-HD-English-0.1.1-preview "D:\Emulators\RPCS3\rpcs3.exe"
+& $py tools/test_release.py release/SRWT1-HD-English-0.1.2-preview
+& $py tools/test_release_decrypt.py release/SRWT1-HD-English-0.1.2-preview "D:\Emulators\RPCS3\rpcs3.exe"
 ```
 
 The first script checks actual C# install/restore behavior on temporary copies,
@@ -444,7 +444,7 @@ SELF** action; these tools do not supply game files or keys.
 & $py -m unittest discover -s tools -p 'test_vita*.py' -v
 & $py tools/vita_build.py --game local/vita/original --self local/vita/eboot.original.self
 & $py tools/vita_verify.py --source local/vita/eboot.original.self
-& $py tools/vita_release.py --version 0.1.2-vita-preview
+& $py tools/vita_release.py --version 0.1.3-vita-preview
 ```
 
 Provide an ARM-capable clang with ld.lld and llvm-objcopy on PATH or beside
@@ -568,3 +568,27 @@ color matching to the original colors used in that region, keeping dark frame
 colors out of cyan glows. The original palette and all outside pixels remain
 unchanged. `vita_ui.team_banner` applies checked, named SSAD changes for a
 centered, uniformly enlarged team label without the duplicated suffix.
+
+### Title version label — PS3 and Vita
+
+`title_version.py` uses original bitmap glyphs to add `pk87` above
+`eng vMAJOR.MINOR.PATCH`, right-aligned with comfortable bottom/right insets.
+It handles the native title atlas's rotated right tile and verifies that all
+other pixels and stored archive entries are unchanged. Inputs must include
+the original GCM G8B8 font entry at `work/tabata/00000.bin`; pass `--font`
+to use a different path. No font or game texture is included in the repo.
+
+```powershell
+python tools/title_version.py --platform ps3 --version 0.1.2-preview --archive build/KDATAPS3.translated.CPK --background-archive local/ps3/NPJB00514/USRDIR/DATA/KURODATA/KDATAPS3.CPK --output build/KDATAPS3.versioned.CPK
+```
+
+Use a clean original `--background-archive` for repeat builds so an older
+version is removed before the new one is rendered. The output is a separate
+CPK plus `.title.png` layer preview and `.title.json` metadata. The PNG shows
+the background and label only; it is not an in-game screenshot.
+
+`tools/translation_versions.json` holds the platform defaults. The Vita builder
+uses `--version` and `--label-font`, records `title_label` in its manifest, and
+the Vita packager refuses a different release version. The PS3 release command
+stamps its `--version` automatically, using its original archive and
+`--label-font` input. Keep using a fully translated `--ui-archive` for PS3.

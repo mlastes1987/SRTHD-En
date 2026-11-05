@@ -77,6 +77,8 @@ def package(manifest_path,version,output):
         raise ValueError('Invalid version label')
     manifest_path=manifest_path.resolve()
     build=json.loads(manifest_path.read_text(encoding='utf8'))
+    if build.get('title_label',{}).get('version',version)!=version:
+        raise ValueError('Package version differs from the title label; rebuild with --version '+version)
     if build.get('title_id')!='PCSG00260':raise ValueError('Expected PCSG00260 build')
     if {e['path'] for e in build['files']}!=PAYLOAD_PATHS or len(build['files'])!=2:
         raise ValueError('Release must contain exactly the two supported Vita replacement files')
@@ -100,6 +102,7 @@ def package(manifest_path,version,output):
                  runtime_tested=bool(build.get('runtime_tested',False)),
                  stage=build.get('stage',''),text_counts=build.get('text_counts',{}),
                  validation=build.get('validation',{}),runtime=build.get('runtime',{}),files=files)
+    if build.get('title_label'):release['title_label']=build['title_label']
     payloads['manifest.json']=(json.dumps(release,indent=2)+'\n').encode('utf8')
     payloads['README-PLAYTEST.txt']=instructions(version).encode('utf8')
     payloads['SHA256SUMS.txt']=''.join(sha(data)+'  '+name+'\n' for name,data in sorted(payloads.items())).encode('utf8')
