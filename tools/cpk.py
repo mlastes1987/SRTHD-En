@@ -679,6 +679,7 @@ RPCS3_USRDIR = str(RPCS3_DIR / "dev_hdd0/game/NPJB00514/USRDIR") if RPCS3_DIR el
 def read_replacements(indir):
     """Collect <indir>/NNNNN[.ext] files as {id: bytes}."""
     found = {}
+    names = {}
     for name in sorted(os.listdir(indir)):
         path = os.path.join(indir, name)
         if not os.path.isfile(path):
@@ -686,8 +687,13 @@ def read_replacements(indir):
         stem = name.split(".")[0]
         if not stem.isdigit():
             continue
+        fid=int(stem)
+        if fid in names:
+            raise ValueError('Duplicate replacement ID %05d: %s and %s. Keep previews and backups in a separate directory.'
+                             % (fid,names[fid],name))
+        names[fid]=name
         with open(path, "rb") as f:
-            found[int(stem)] = f.read()
+            found[fid] = f.read()
     return found
 
 

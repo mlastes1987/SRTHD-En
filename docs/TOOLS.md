@@ -4,9 +4,13 @@ This guide describes the tools actually included in the public repository.
 Examples use PowerShell and run from the repository root. Replace example
 drive paths with your own paths.
 
-**Playing the translation?** You do not need the Python tools. Get the current
-test build from [Discord](https://discord.gg/DwR2jxj5b), extract the whole ZIP,
-close RPCS3, and run **SRW English Patcher.exe**. See [Player installation](#player-installation).
+**Playing on PS3 / RPCS3?** Get the PS3 test build from
+[Discord](https://discord.gg/DwR2jxj5b), extract the complete ZIP, close RPCS3,
+and run **SRW English Patcher.exe**. See [Player installation](#player-installation).
+
+**Playing on Vita / Vita3K?** Use the separately named Vita rePatch ZIP and
+the [Vita installation guide](VITA_INSTALL.md). Full details of the native
+Vita build and its current test coverage are in [VITA_PORT.md](VITA_PORT.md).
 
 **Contributing to tools or builds?** Start with [Setup](#setup), then choose a
 workflow below. A clean clone contains source and screenshots, not the
@@ -26,6 +30,7 @@ maintainer's working translation or a complete build kit.
 - [Inspect layouts and fix the selection banner](#inspect-layouts-and-fix-the-selection-banner)
 - [Inspect PowerPC code](#inspect-powerpc-code)
 - [Package and test an installer](#package-and-test-an-installer)
+- [Build and package the Vita port](#build-and-package-the-vita-port)
 - [Tool reference](#tool-reference)
 - [Troubleshooting](#troubleshooting)
 
@@ -426,6 +431,61 @@ decryption test may update RPCS3's normal logs, but neither script patches the
 live game. See [the release pipeline](PATCHING_PIPELINE.md) for recovery and
 patch-format details.
 
+## Build and package the Vita port
+
+The Vita target is Japanese **PCSG00260 v1.00**. Its fixed-address ARM SELF,
+native GXT textures, and runtime hooks use a separate pipeline from PS3.
+Keep your original Vita installation and decrypted SELF under ignored `local/`
+or `work/` directories. Export the original with Vita3K's **Other > Decrypt All
+SELF** action; these tools do not supply game files or keys.
+
+```powershell
+& $py -m pip install -r requirements-vita.txt
+& $py -m unittest discover -s tools -p 'test_vita*.py' -v
+& $py tools/vita_build.py --game local/vita/original --self local/vita/eboot.original.self
+& $py tools/vita_verify.py --source local/vita/eboot.original.self
+& $py tools/vita_release.py --version 0.1.0-vita-preview
+```
+
+Provide an ARM-capable clang with ld.lld and llvm-objcopy on PATH or beside
+clang. The build also needs the maintained `work/text/translation.csv` and
+the approved PNG artwork listed in [VITA_PORT.md](VITA_PORT.md). A clean clone
+includes the font measurements and reviewed Vita overrides; full translation
+tables, original files, and finished artwork are still local maintainer inputs.
+
+`vita_build.py` writes two staged files and a build manifest under `build/vita`,
+plus detailed reports under `work/vita`. It enables proportional spacing,
+attack/counter paging, moved strings, reviewed overrides, and the team-banner
+fix by default. `--basic` reproduces the first in-place-only port. Optional
+`--csv`, `--art`, `--work`, and `--output` arguments select local inputs/outputs.
+The build does not modify your installed game.
+
+The release command creates a clearly labeled **Vita-PCSG00260** rePatch
+folder, ZIP, and checksum sidecar under ignored `release/`. The ZIP contains
+full replacement files, a relative-path manifest, checksums, and player
+instructions. See [VITA_INSTALL.md](VITA_INSTALL.md) for hardware overlay,
+manual Vita3K replacement, and checked Python installation/restore commands.
+The latest runtime changes and hardware compatibility still need playtesting.
+
+For low-level texture work:
+
+```powershell
+& $py tools/vita_gxt.py decode work/vita/kuro/00118.bin work/vita/menu-preview.png
+& $py tools/vita_gxt.py encode work/vita/kuro/00118.bin work/vita/replacements/00118.bin --image work/ui_edit/title_menu_faithful_native.png
+```
+
+Create the destination directory first. The GXT tool supports this game's
+single-texture P8 layout, including palette alpha and linear/swizzled pixels;
+unsupported formats are rejected. Keep each numbered archive replacement
+in its own payload directory, with previews and backups elsewhere. `cpk.py`
+now rejects duplicate numeric IDs instead of silently selecting a later file.
+
+Runtime tests execute the emitted ARM code without an emulator or game data.
+They skip with a stated reason if Unicorn or the LLVM tools are missing.
+Static build verification additionally requires your maintained local build.
+Both successful static checks and runtime instruction tests leave actual
+in-game compatibility as a separate test step.
+
 ## Tool reference
 
 | Tool | Role | Main inputs / effects |
@@ -453,6 +513,28 @@ patch-format details.
 | `test_battle_pages.py` | Execute emitted paging instructions in tests | Synthetic fixtures; two additional scans need local quote report |
 | `test_release.py` | C# integration tests | Release folder and local originals; uses disposable copies |
 | `test_release_decrypt.py` | Automatic RPCS3 decryption/install/restore test | Release folder, original game, RPCS3; uses disposable copies |
+
+### Vita tools and shared archive checks
+
+| Tool | Role | Main inputs / effects |
+|---|---|---|
+| `vita_build.py` | Build and verify Vita text, ARM hooks, GXT UI and team banner | Original Vita data, decrypted SELF, maintained CSV/art; writes staged build and manifest |
+| `vita_text.py` | Import Vita strings and optional overflow pool | Decrypted SELF/CSV; optional reviewed overrides and pointer/instruction rewrites |
+| `vita_arm.py` | Thumb-2 branch/immediate and address-pair helpers | Imported by Vita tools; fixed PCSG00260 addresses |
+| `vita_self.py` | Repack plain fixed-address Vita SELF segments | Preserves segment VAs and comment data; initializes the original BSS to zero |
+| `vita_runtime.py` / `vita_runtime.s` | Assemble/apply ARM spacing, paging and faction-label hooks | LLVM tools, measured metrics, fresh staged SELF; writes runtime report |
+| `vita_font_metrics.json` | Portable 95-glyph measurements | Numeric advances, bearings, glyph/SJIS indices and k/s adjustments; no bitmap |
+| `vita_text_overrides.json` | Reviewed Vita source mappings | Exact original text/offset guards, translations, inline-record capacities and review notes |
+| `vita_gxt.py` | Decode/encode native Vita P8 textures | GXT and PNG; palette quantization, alpha, layout preservation |
+| `vita_verify.py` | Check every staged text/reference/hook change | Original SELF, staged SELF, generated reports and portable metrics |
+| `vita_install.py` | Checked Vita3K install, upgrade and restoration | Build or extracted-package manifest and installed PCSG00260; original backups and hash checks |
+| `vita_release.py` | Create private Vita rePatch folder/ZIP/checksums | Verified build manifest; only two supported replacement paths; no source publication |
+| `test_vita_port.py` | Text and texture safety tests | Synthetic fixtures; no game data |
+| `test_vita_self.py` | SELF packing and BSS tests | Synthetic segments; no game data |
+| `test_vita_runtime.py` | Execute spacing/paging/faction ARM hooks | Included metrics, Unicorn and LLVM; no game data |
+| `test_vita_install.py` | Install/upgrade/restore/preflight tests | Temporary synthetic game directories and manifests |
+| `test_vita_release.py` | rePatch package structure and integrity tests | Temporary synthetic builds; private-path removal and hash refusal |
+| `test_cpk_replacements.py` | Reject conflicting numeric replacement IDs | Temporary binary/preview fixtures |
 
 ## Troubleshooting
 

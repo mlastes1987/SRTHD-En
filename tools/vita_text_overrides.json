@@ -1,0 +1,938 @@
+{
+  "0x12258c": {
+    "japanese": "覚",
+    "english": "WA",
+    "reason": "PS3 neighboring literal sequence; score 11"
+  },
+  "0x122590": {
+    "japanese": "手",
+    "english": "ME",
+    "reason": "PS3 neighboring literal sequence; score 12"
+  },
+  "0x122594": {
+    "japanese": "共",
+    "english": "SE",
+    "reason": "PS3 neighboring literal sequence; score 13"
+  },
+  "0x122598": {
+    "japanese": "乱",
+    "english": "JA",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12259c": {
+    "japanese": "熱",
+    "english": "BL",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x1225a0": {
+    "japanese": "閃",
+    "english": "FL",
+    "reason": "PS3 neighboring literal sequence; score 13"
+  },
+  "0x1225a4": {
+    "japanese": "鉄",
+    "english": "IR",
+    "reason": "PS3 neighboring literal sequence; score 12"
+  },
+  "0x1225a8": {
+    "japanese": "集",
+    "english": "FO",
+    "reason": "PS3 neighboring literal sequence; score 12"
+  },
+  "0x1225ac": {
+    "japanese": "必",
+    "english": "SU",
+    "reason": "PS3 neighboring literal sequence; score 11"
+  },
+  "0x122788": {
+    "japanese": "精神コマンド",
+    "english": "Spirits",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122d0c": {
+    "japanese": "能力",
+    "english": "Status",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122d50": {
+    "japanese": "部隊表",
+    "english": "Unit Roster",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122d5c": {
+    "japanese": "作戦目的",
+    "english": "Objectives",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122da8": {
+    "japanese": "ユニット一覧",
+    "english": "Unit List",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122dbc": {
+    "japanese": "パワーアップ",
+    "english": "Power Up",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122dd0": {
+    "japanese": "ユニット離脱",
+    "english": "Unit Leaves",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122de4": {
+    "japanese": "データ管理",
+    "english": "Data Mgmt",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122e08": {
+    "japanese": "次のマップへ",
+    "english": "Next Map",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122e2c": {
+    "japanese": "ロード",
+    "english": "Load",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x122f20": {
+    "japanese": "ここまでのマップ上の進行状況をセーブします。",
+    "english": "Saving progress on\n　this map.",
+    "reason": "PS3 neighboring literal sequence; score 13"
+  },
+  "0x1232e4": {
+    "japanese": "フルアーマーガンダム",
+    "english": "Full Armor Gundam",
+    "reason": "PS3 neighboring literal sequence; score 12"
+  },
+  "0x1234b0": {
+    "japanese": "サイコ・ガンダム（ＭＡ）",
+    "english": "Psycho Gundam (MA)",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123520": {
+    "japanese": "Ｇフォートレス",
+    "english": "G-Fortress",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123c08": {
+    "japanese": "閃",
+    "english": "F",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123c50": {
+    "japanese": "鉄",
+    "english": "I",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123cb0": {
+    "japanese": "集",
+    "english": "O",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123d08": {
+    "japanese": "必",
+    "english": "U",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123dc0": {
+    "japanese": "加",
+    "english": "A",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123e28": {
+    "japanese": "覚",
+    "english": "W",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x123fd4": {
+    "japanese": "手",
+    "english": "M",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x124074": {
+    "japanese": "狙",
+    "english": "S",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x1240cc": {
+    "japanese": "突",
+    "english": "R",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x124128": {
+    "japanese": "乱",
+    "english": "J",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x1242c8": {
+    "japanese": "熱",
+    "english": "B",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x1243b4": {
+    "japanese": "共",
+    "english": "Res.",
+    "reason": "PS3 neighboring literal sequence; score 13"
+  },
+  "0x12b354": {
+    "japanese": "防御",
+    "english": "Defend",
+    "reason": "PS3 neighboring literal sequence; score 11"
+  },
+  "0x12b408": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12b480": {
+    "japanese": "ロード",
+    "english": "Load",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12ba9c": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bae0": {
+    "japanese": "総説得成功数",
+    "english": "Persuaded",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12baf4": {
+    "japanese": "ユニット一覧",
+    "english": "Unit list",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bb08": {
+    "japanese": "パワーアップ",
+    "english": "Power up",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bb1c": {
+    "japanese": "ユニット離脱",
+    "english": "Unit leaves",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bb50": {
+    "japanese": "データ管理",
+    "english": "Data",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bb74": {
+    "japanese": "次のマップへ",
+    "english": "Next map",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bc14": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bc28": {
+    "japanese": "精神コマンド",
+    "english": "Spirit commands",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bc3c": {
+    "japanese": "ここまでのマップ上の進行状況をセーブします。",
+    "english": "Saving progress on this map.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bcdc": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bf58": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bf6c": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12bf74": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c044": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c058": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c060": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c130": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c144": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c14c": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c21c": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c230": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c238": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c308": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c31c": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c324": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c3f4": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c408": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c410": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c470": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c49c": {
+    "japanese": "以下の内容でアイテムを使用しました",
+    "english": "Used the item as follows",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c4d0": {
+    "japanese": "使用アイテム",
+    "english": "Item",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c4e4": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c4ec": {
+    "japanese": "対象ユニット",
+    "english": "Target unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c544": {
+    "japanese": "使用アイテム",
+    "english": "Item Used",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c558": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c560": {
+    "japanese": "対象ユニット",
+    "english": "Target Unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c5b8": {
+    "japanese": "使用アイテム",
+    "english": "Item Used",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c5cc": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c5d4": {
+    "japanese": "対象ユニット",
+    "english": "Target Unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c62c": {
+    "japanese": "使用アイテム",
+    "english": "Item Used",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c640": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c648": {
+    "japanese": "対象ユニット",
+    "english": "Target Unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c6a0": {
+    "japanese": "使用アイテム",
+    "english": "Item Used",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c6b4": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c6bc": {
+    "japanese": "対象ユニット",
+    "english": "Target Unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c714": {
+    "japanese": "使用アイテム",
+    "english": "Item Used",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c728": {
+    "japanese": "効果",
+    "english": "Effect",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c730": {
+    "japanese": "対象ユニット",
+    "english": "Target Unit",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12c774": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cce8": {
+    "japanese": "フェイズ終了",
+    "english": "End Phase",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cd0c": {
+    "japanese": "部隊表",
+    "english": "Unit Roster",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cd18": {
+    "japanese": "途中セーブ",
+    "english": "Battle Save",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cd74": {
+    "japanese": "精神コマンド",
+    "english": "Spirit Command",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cd88": {
+    "japanese": "能力",
+    "english": "Stats",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cdd4": {
+    "japanese": "選択No.",
+    "english": "No.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cefc": {
+    "japanese": "総説得成功数",
+    "english": "Persuade",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cf3c": {
+    "japanese": "効果",
+    "english": "Eff.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cf70": {
+    "japanese": "効果",
+    "english": "Eff.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cf94": {
+    "japanese": "効果",
+    "english": "Eff.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12cfb8": {
+    "japanese": "効果",
+    "english": "Eff.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d058": {
+    "japanese": "縮小",
+    "english": "Zoom Out",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d060": {
+    "japanese": "拡大",
+    "english": "Zoom In",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d2b0": {
+    "japanese": "縮小",
+    "english": "Out",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d2b8": {
+    "japanese": "拡大",
+    "english": "In",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d4b4": {
+    "japanese": "選択No.",
+    "english": "Sel. No.",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d6f4": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d748": {
+    "japanese": "防御",
+    "english": "Def",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d7d0": {
+    "japanese": "地形",
+    "english": "Terr",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d7d8": {
+    "japanese": "空",
+    "english": "A",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d7dc": {
+    "japanese": "陸",
+    "english": "L",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d7e0": {
+    "japanese": "海",
+    "english": "S",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d7e4": {
+    "japanese": "宇",
+    "english": "U",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d810": {
+    "japanese": "地形",
+    "english": "Terrain",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d818": {
+    "japanese": "空",
+    "english": "A",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d81c": {
+    "japanese": "陸",
+    "english": "L",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d820": {
+    "japanese": "海",
+    "english": "S",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d824": {
+    "japanese": "宇",
+    "english": "U",
+    "reason": "PS3 neighboring literal sequence; score 14"
+  },
+  "0x12d8a0": {
+    "japanese": "フェイズ終了",
+    "english": "End phase",
+    "reason": "PS3 neighboring literal sequence; score 11"
+  },
+  "0xd52e0": {
+    "japanese": "あと%d機",
+    "english": "%d left",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x1224d0": {
+    "japanese": "空",
+    "english": "A",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x1224d4": {
+    "japanese": "陸",
+    "english": "L",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x1224dc": {
+    "japanese": "宇",
+    "english": "U",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x122580": {
+    "japanese": "突",
+    "english": "RU",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x122588": {
+    "japanese": "狙",
+    "english": "SN",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x1225b0": {
+    "japanese": "加",
+    "english": "AC",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12322c": {
+    "japanese": "失敗",
+    "english": "Fail",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x123888": {
+    "japanese": "闘神ゴッド・ノア",
+    "english": "God Noah",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x128a70": {
+    "japanese": "あと%d機",
+    "english": "%d unit(s) to go",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x128c4c": {
+    "japanese": "失敗",
+    "english": "Failure",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12c510": {
+    "japanese": "以下の内容でアイテムを使用しました",
+    "english": "Item used with these effects",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12c584": {
+    "japanese": "以下の内容でアイテムを使用しました",
+    "english": "Item used with these effects",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12c5f8": {
+    "japanese": "以下の内容でアイテムを使用しました",
+    "english": "Item used with these effects",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12c66c": {
+    "japanese": "以下の内容でアイテムを使用しました",
+    "english": "Item used with these effects",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12c6e0": {
+    "japanese": "以下の内容でアイテムを使用しました",
+    "english": "Item used with these effects",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12d8c4": {
+    "japanese": "部隊表",
+    "english": "Forces",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12d930": {
+    "japanese": "作戦目的",
+    "english": "Objectives",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x12d960": {
+    "japanese": "途中セーブ",
+    "english": "Save",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x18f820": {
+    "japanese": "海",
+    "english": "Sea",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x129df8": {
+    "japanese": "SaveFlow : 正常終了\n",
+    "english": "SaveFlow: normal end\n",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x129e10": {
+    "japanese": "SaveFlow : エラー終了 %s\n",
+    "english": "SaveFlow: error %s\n",
+    "reason": "Reviewed UI/terrain label or diagnostic message context"
+  },
+  "0x18f938": {
+    "japanese": "本拠地",
+    "english": "Home Base",
+    "reason": "Reviewed UI/terrain label or diagnostic message context",
+    "inline_capacity": 16
+  },
+  "0x11fadc": {
+    "japanese": "Error: 不正なラウンド種別です\n",
+    "english": "Error: Invalid round type\n",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x11fb18": {
+    "japanese": "Error: 不正な守備側戦闘結果です\n",
+    "english": "Error: Invalid defending battle result\n",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x1225dc": {
+    "japanese": "%3d％",
+    "english": "%3d%%",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x122ca8": {
+    "japanese": "%+d％",
+    "english": "%+d%%",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x122e54": {
+    "japanese": "メモリーカード",
+    "english": "Memory Card",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x123aa8": {
+    "japanese": "※ マップ上の進行状況は\n    保存されていません。\n",
+    "english": "Note: Progress on the map\n    has not been saved.\n",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x1299a0": {
+    "japanese": "Ｓ",
+    "english": "S",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12ad24": {
+    "japanese": "ネットワークへのアップロード／ダウンロードには、\n%d分以上の間隔を空ける必要があります。\nあとおよそ%s経過すると、操作が出来るようになります。",
+    "english": "Network uploads/downloads must be at least\n%d minutes apart.\nPlease wait about %s before trying again.",
+    "encoding": "utf-8",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e628": {
+    "japanese": "新しいセーブデータ",
+    "english": "New Save Data",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e63c": {
+    "japanese": "セーブデータ",
+    "english": "Save Data",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e6c4": {
+    "japanese": "#### retry system 開始 ###\n",
+    "english": "#### retry system start ###\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e70c": {
+    "japanese": "#### retry system 発動 ###\n",
+    "english": "#### retry system on ###\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e8a0": {
+    "japanese": "ロードできませんでした。\n",
+    "english": "Could not load.\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e8bc": {
+    "japanese": "セーブロードできませんでした。\n",
+    "english": "Could not save/load.\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e8dc": {
+    "japanese": "システムデータに、\nマップ上の進行状況がセーブされていません。",
+    "english": "No map progress has been saved\nin the system data.",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e970": {
+    "japanese": "システムデータが破損しています。\nセーブしたマップ上の進行状況が失われて\nしまいますが、新規に作成しますか？",
+    "english": "The system data is corrupted.\nCreating new data will erase saved map progress.\nCreate new system data?",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12e9dc": {
+    "japanese": "セーブが終了しました。\nこのままゲームを続けますか？",
+    "english": "Saving is complete.\nContinue playing?",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12ea10": {
+    "japanese": "メモリーカードの空き容量が足りません。セーブを続けるには、%dＫＢ以上の空き容量が必要です。\n他のセーブデータを削除しますか？",
+    "english": "There is not enough free space on the memory card.\nSaving requires at least %d KB.\nDelete other save data?",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12eab0": {
+    "japanese": "まだきめてない。\n",
+    "english": "Undecided.\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12eb98": {
+    "japanese": "セーブスレッド開始\n",
+    "english": "Save thread start\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12ec48": {
+    "japanese": "ロードスレッド開始\n",
+    "english": "Load thread start\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12ed50": {
+    "japanese": "削除スレッド開始\n",
+    "english": "Delete started\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12ed64": {
+    "japanese": "容量取得スレッド開始\n",
+    "english": "Space check started\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x12eda8": {
+    "japanese": "存在チェックスレッド開始\n",
+    "english": "Check thread start\n",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record"
+  },
+  "0x18f7a8": {
+    "japanese": "進入不可",
+    "english": "Impassable",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f7d0": {
+    "japanese": "平地",
+    "english": "Plains",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f7f8": {
+    "japanese": "森",
+    "english": "Forest",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f848": {
+    "japanese": "山",
+    "english": "Mountain",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f870": {
+    "japanese": "床",
+    "english": "Floor",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f898": {
+    "japanese": "床",
+    "english": "Floor",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f8c0": {
+    "japanese": "柱",
+    "english": "Pillar",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f8e8": {
+    "japanese": "穴",
+    "english": "Pit",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f910": {
+    "japanese": "タワー／基地",
+    "english": "Tower / Base",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f960": {
+    "japanese": "宇宙空間",
+    "english": "Space",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f988": {
+    "japanese": "暗礁宙域",
+    "english": "Asteroid Field",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f9b0": {
+    "japanese": "要塞",
+    "english": "Fortress",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  },
+  "0x18f9d8": {
+    "japanese": "川",
+    "english": "River",
+    "encoding": "cp932",
+    "reason": "Vita-specific source literal or fixed terrain-name record",
+    "inline_capacity": 16
+  }
+}

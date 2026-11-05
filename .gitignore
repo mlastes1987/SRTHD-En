@@ -40,3 +40,13 @@ __pycache__/
 *.7z
 *.srwdiff
 .srwt1-english/
+
+# Vita private payloads and generated ARM objects
+*.self
+*.SELF
+*.suprx
+*.skprx
+*.vpk
+*.o
+/rePatch/
+.srw-vita-english/

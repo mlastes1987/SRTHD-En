@@ -5,9 +5,85 @@ public tooling. Earlier development was not tagged as a sequence of public
 releases, so it is summarized under the first packaged preview rather than
 assigned invented version numbers.
 
-**Current test build: 0.1.1-preview.** Test builds are shared through
-[Discord](https://discord.gg/DwR2jxj5b). This remains a work-in-progress fan
-translation for PS3 **NPJB00514** in RPCS3.
+Current previews: **PS3 0.1.1-preview** (NPJB00514 / RPCS3) and
+**Vita 0.1.0-vita-preview** (PCSG00260). Test builds and feedback are coordinated
+through [Discord](https://discord.gg/DwR2jxj5b). Both remain work in progress;
+the latest Vita runtime changes and hardware rePatch compatibility need
+in-game confirmation.
+
+## Vita 0.1.0-vita-preview — 2026-11-04
+
+### Translation and overflow handling
+
+- Imported 6,708 translated string occurrences: 6,492 in place and 216 in an
+  added pool after the original BSS. Longer text is preserved rather than
+  shortened to the Japanese byte length.
+- Updated 289 table pointers and 51 Thumb MOVW/MOVT address pairs. Preserved
+  segment virtual addresses and the original BSS's zero initialization.
+- Resolved the first build's 137 ambiguous source matches using neighboring
+  literal context and reviewed per-offset overrides. Added 37 audited source
+  literals, including Vita-specific save/load messages and fixed terrain names.
+- Added exact source-byte checks, per-entry reports, supported inline-record
+  capacities, and checks for merged literals/interior references.
+
+### Native spacing, layout, and paging
+
+- Ported proportional spacing to native ARM hooks. All 95 ASCII glyph bounds
+  match the Vita font atlas; advances/bearings match the PS3 measurements,
+  including the one-pixel reductions for `k` and `s`.
+- Synchronized drawing and width measurement and replaced the centered label's
+  character-count shortcut with measured width.
+- Added explicit Allies/Enemies origins with a 10-pixel gap in both selection
+  states.
+- Added two-page attack/counter dialogue support, splitting after the second
+  newline, holding battle progression for 120 native ticks per page, and using
+  the native delta for fast-forward. Rendering retains the second page if the
+  normal path resets the quote pointer.
+- Audited 4,904 matched quote occurrences, including 28 requiring two pages,
+  against four-line, 800-pixel and native buffer byte limits.
+
+### Graphics and packages
+
+- Converted the approved single-line English logo, faithful title selections,
+  Objectives, and Level Up! atlas to native Vita GXT P8, preserving palette
+  transparency and linear/swizzled layout.
+- Ported the two team-banner SSAD property corrections after confirming the
+  PS3 and Vita originals were byte-identical.
+- Verified four CPK replacements and 158 unchanged stored payloads.
+- Added checked Vita3K installation/upgrades/restoration with original backups,
+  all-file preflight, package-relative paths, and installed-build records.
+- Added a separately named **Vita-PCSG00260 rePatch** folder/ZIP, player
+  instructions, sanitized manifest, extracted-file checksums, and ZIP checksum.
+  The package includes only the two supported modified game files.
+
+### Public tools and verification
+
+- Added native Vita text/SELF/Thumb/GXT/runtime/build/verification/installation/
+  packaging tools, ARM assembly, portable glyph measurements, reviewed text
+  overrides, and 25 synthetic/ARM/installer/package tests.
+- Added a guard against duplicate numeric CPK replacement IDs, with two
+  regression tests. A preview PNG or backup can no longer silently replace a
+  binary payload with the same ID.
+- Updated the README, platform-specific install/build guides, tool reference,
+  developer setup, issue form, and CI dependency setup for both platforms.
+- Kept the public PS3 tools' portable path configuration and existing installer
+  source. Playtest payloads, game files, license data, modules and plugins remain
+  excluded from Git.
+- Verified every changed byte in the original loaded segments, all translated
+  bytes and rewritten references, 12 branch hooks plus the centered wrapper,
+  BSS zero initialization, and the unchanged SCE comment segment.
+
+### Remaining playtesting
+
+The new Vita spacing and paging changes have passed isolated ARM instruction
+tests and static build checks, not a complete in-game playthrough. Test long
+attack/counter quotes, multi-unit attacks, fast-forward, save/load dialogs,
+map returns, and selection layouts. The traced Vita path uses two global
+quote buffers; PS3's four-buffer multi-unit implementation is not a Vita
+compatibility guarantee. Hardware rePatch execution is unverified.
+
+All displayed public screenshots are still approved PS3/RPCS3 captures. This
+Vita preview does not change the PS3 game-patch version.
 
 ## Unreleased — public documentation
 

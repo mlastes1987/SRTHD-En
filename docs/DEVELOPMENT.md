@@ -79,9 +79,23 @@ The release builder reads the approved archive inputs above, runs checks and
 installer integration tests, then emits a patch-only ZIP under `release/`.
 See [PATCHING_PIPELINE.md](PATCHING_PIPELINE.md).
 
+## Vita development
+
+The Vita tools target **PCSG00260 v1.00**. Install their Python dependencies
+with `python -m pip install -r requirements-vita.txt`. Runtime assembly also
+needs ARM-capable clang, ld.lld, and llvm-objcopy. Synthetic tests run without
+game files; the ARM tests require those tools plus Unicorn and skip explicitly
+when they are absent.
+
+The Vita builder takes explicit `--game` and `--self` paths. It uses its own
+`build/vita` and `work/vita` outputs, portable glyph metrics, reviewed overrides,
+and native ARM/GXT tools. PS3 path environment variables retain their existing
+meaning. Follow [VITA_PORT.md](VITA_PORT.md) for the complete build/verification/
+packaging workflow, and [VITA_INSTALL.md](VITA_INSTALL.md) for player setup.
+
 ## Contributions
 
-For player testing, report the build version, RPCS3 version, episode, unit,
+For player testing, report the platform/title ID, build version, emulator version or Vita firmware, episode, unit,
 attack or menu, expected behavior, and reproduction steps. Screenshots are
 especially useful for spacing and paging issues. Share no game dumps, license
 keys, or save files containing private information in issues or commits.

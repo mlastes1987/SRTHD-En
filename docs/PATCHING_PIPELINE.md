@@ -1,8 +1,11 @@
-# Building a patch-only release
+# Building a PS3 patch-only release
 
 See the [tool usage guide](TOOLS.md#package-and-test-an-installer) for command
 examples and the [changelog](../CHANGELOG.md) for the contents and validation
 status of each preview.
+
+For the Vita replacement-file rePatch ZIP, use the separate
+[Vita packaging workflow](VITA_PORT.md#package-a-vita-repatch-playtest).
 
 This pipeline is for the maintainer's local build workspace. Players get the
 current test build on [Discord](https://discord.gg/DwR2jxj5b) and use the

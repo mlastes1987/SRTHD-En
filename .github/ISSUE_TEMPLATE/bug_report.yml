@@ -5,6 +5,16 @@ body:
   - type: markdown
     attributes:
       value: "Thanks for testing! Current builds are available at https://discord.gg/DwR2jxj5b. Please do not attach game files or license keys."
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform / title ID
+      options:
+        - PS3 / RPCS3 — NPJB00514
+        - Vita3K — PCSG00260
+        - Vita hardware / rePatch — PCSG00260
+    validations:
+      required: true
   - type: input
     id: build
     attributes:
@@ -14,7 +24,7 @@ body:
   - type: input
     id: emulator
     attributes:
-      label: RPCS3 version and operating system
+      label: Emulator version / operating system, or Vita firmware
     validations:
       required: true
   - type: textarea
