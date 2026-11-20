@@ -5,24 +5,11 @@ public tooling. Earlier development was not tagged as a sequence of public
 releases, so it is summarized under the first packaged preview rather than
 assigned invented version numbers.
 
-Current previews: **PS3 0.1.5-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.6-vita-preview** (PCSG00260). Test builds and feedback are coordinated
+Current previews: **PS3 0.1.2-preview** (NPJB00514 / RPCS3) and
+**Vita 0.1.3-vita-preview** (PCSG00260). Test builds and feedback are coordinated
 through [Discord](https://discord.gg/DwR2jxj5b). Both remain work in progress;
 the latest Vita runtime changes and hardware rePatch compatibility need
 in-game confirmation.
-
-## PS3 0.1.5-preview / Vita 0.1.6-vita-preview — 2026-11-09
-
-- Repositioned the MAP strip labels and percentages so the full words
-  **Evade** and **Recover** fit at the original font size. Measured gaps
-  are at least 14 pixels for values up to ±100% in the 1280-pixel layout.
-- Translated all 17 PS3 terrain names, including **Plains** next to MAP.
-  Added **Pond** and **Lake** to complete the Vita terrain table.
-- Shortened the overflowing Upgrade Item placeholder to three dashes.
-- Fixed the team selection prompt so “Choose 6 units you like” and
-  “as your team members.” sit on separate rows. The displayed count
-  still comes from the game.
-- Verified both build packages. The revised layouts await an in-game check.
 
 ## PS3 0.1.2-preview / Vita 0.1.3-vita-preview — 2026-11-05
 

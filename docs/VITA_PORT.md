@@ -5,7 +5,7 @@ English artwork. This is an early development build, not a complete Vita release
 
 ## Spacing and paging build — November 4, 2026
 
-The latest test build contains **6,710 English string occurrences**: 6,494 fit
+The latest test build contains **6,708 English string occurrences**: 6,492 fit
 in place and 216 use added space after the original BSS. All 137 ambiguous
 matches from the initial build are resolved. Another 37 source literals are
 translated, including Vita save-data dialogs and fixed terrain-name records.
@@ -46,23 +46,19 @@ BSS zero initialization, and the untouched SCE comment segment. Every changed
 byte in the original loaded segments is accounted for. The UI CPK has seven
 verified replacements and 155 byte-identical untouched stored payloads.
 
-The current package is ready for Vita3K testing.
+This build is installed for Vita3K testing, with original backups preserved.
 The new runtime behavior has not yet been checked in-game. Test long attacking
 and counterattacking lines, multi-unit attacks, fast-forward, and returning to
 the map. The traced Vita path has two global quote buffers; the PS3 four-buffer
 multi-unit implementation cannot simply be copied. Multi-unit behavior is not
 yet confirmed in-game.
 
-The title screen now includes `pk87` above `eng v0.1.6`, inset at bottom-right.
+The title screen now includes `pk87` above `eng v0.1.3`, inset at bottom-right.
 Two additional shared title tests cover placement and the rotated tile. The
 builder reads its default version from `tools/translation_versions.json`; use
 `--version` to override it. Supply the original shared PS3 GCM font entry as
 `--label-font work/tabata/00000.bin`. The font is a private maintainer input.
 A package version must match the version baked into the title.
-
-The latest playtest build separates the MAP strip percentages from the full
-Evade and Recover labels. It also completes the terrain table, shortens the
-Upgrade Item placeholder, and fits the team instructions into their native rows.
 
 ## Initial build history
 
@@ -114,10 +110,10 @@ fix are enabled by default. Use `--basic` to reproduce the initial build.
 After a verified build, run:
 
 ```powershell
-python tools/vita_release.py --version 0.1.6-vita-preview
+python tools/vita_release.py --version 0.1.3-vita-preview
 ```
 
-The output folder is `release/SRW-HD-Vita-PCSG00260-English-0.1.6-vita-preview-rePatch/`.
+The output folder is `release/SRW-HD-Vita-PCSG00260-English-0.1.3-vita-preview-rePatch/`.
 It contains `rePatch/PCSG00260/eboot.bin`,
 `rePatch/PCSG00260/DATA/kurodata/KDataVITA.cpk`, player instructions,
 an installable manifest with package-relative paths, and `SHA256SUMS.txt`.

@@ -6,7 +6,6 @@ import shutil
 import struct
 import subprocess
 from vita_arm import branch
-from map_strip import vita_changes
 from vita_self import repack
 from vita_text import segments
 
@@ -102,16 +101,11 @@ def patch(source,original,work=Path('work/vita')):
     pos=0x81009d3a-seg['va']
     if payload[pos:pos+4]!=original[old['off']+pos:old['off']+pos+4]:raise ValueError('Center hook changed')
     payload[pos:pos+4]=bytes.fromhex('4ff00103') # mov.w r3,#1
-    for pc, before, after in vita_changes():
-        pos = pc - seg['va']
-        if payload[pos:pos + 4] != before:
-            raise ValueError(f'Unexpected Vita MAP coordinate at {pc:#x}')
-        payload[pos:pos + 4] = after
     output=repack(source,{0:bytes(payload)})
     report=dict(cave=hex(CAVE),payload_bytes=len(blob),end=hex(end),
                 hooks={hex(pc):hex(labels[name]) for pc,name in HOOKS.items()},
                 glyphs=95,ks_adjustment=-1,
-                centered_measurement=True,map_strip_columns=True,
+                centered_measurement=True,
                 paging=dict(ticks_per_page=120,buffers=['0x8125cdf4','0x8125ce6d'],
                             pointer='0x8125d0cc',max_lines=4,max_pages=2))
     (work/'runtime_report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')

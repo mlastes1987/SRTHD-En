@@ -14,8 +14,6 @@ import os
 import shutil
 import subprocess
 import sys
-from map_strip import patch_ps3
-from ps3_terrain import translate_terrain
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from project_paths import ORIGINAL, RPCS3_DIR
@@ -45,7 +43,6 @@ def main(argv):
         TEXT_JSON, CSV, TR_JSON)
     run(sys.executable, os.path.join(ROOT, "tools", "srwtext.py"), "import",
         BASE_ELF, TR_JSON, OUT)
-    translate_terrain(OUT)
 
     # Optional letter-spacing tweak.  The engine advances one full cell per
     # character (advance == descriptor font size), so a smaller size is the only
@@ -59,7 +56,6 @@ def main(argv):
                 "--size", size)
 
     if "--proportional" in argv:
-        patch_ps3(OUT)
         run(sys.executable, os.path.join(ROOT, "tools", "proportional_font.py"))
         run(sys.executable, os.path.join(ROOT, "tools", "battle_pages.py"))
 

@@ -935,20 +935,6 @@
     "reason": "Vita-specific source literal or fixed terrain-name record",
     "inline_capacity": 16
   },
-  "0x18fa00": {
-    "japanese": "池",
-    "english": "Pond",
-    "encoding": "cp932",
-    "reason": "Fixed terrain-name record",
-    "inline_capacity": 16
-  },
-  "0x18fa28": {
-    "japanese": "湖",
-    "english": "Lake",
-    "encoding": "cp932",
-    "reason": "Fixed terrain-name record",
-    "inline_capacity": 16
-  },
   "0x128ac8": {
     "japanese": "ＨＰ＋%d、攻撃＋%d、防御＋%d、素早さ＋%d",
     "english": "HP +%d, Atk +%d, Def +%d, Spd +%d",
