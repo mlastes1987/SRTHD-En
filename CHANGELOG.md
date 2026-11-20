@@ -1,15 +1,67 @@
 # Changelog
 
-This records changes included in the current translation previews and the
-public tooling. Earlier development was not tagged as a sequence of public
-releases, so it is summarized under the first packaged preview rather than
-assigned invented version numbers.
+This changelog covers packaged translation previews and public tooling.
+Earlier work is recorded under the first packaged preview and the development
+history below.
 
-Current previews: **PS3 0.1.5-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.6-vita-preview** (PCSG00260). Test builds and feedback are coordinated
-through [Discord](https://discord.gg/DwR2jxj5b). Both remain work in progress;
-the latest Vita runtime changes and hardware rePatch compatibility need
-in-game confirmation.
+The current previews are **PS3 0.1.9-preview** (NPJB00514 / RPCS3) and
+**Vita 0.1.10-vita-preview** (PCSG00260 / Vita3K). Check Discord for build
+availability and playtest feedback. [Join the project Discord](https://discord.gg/DwR2jxj5b)
+
+## PS3 0.1.9-preview / Vita 0.1.10-vita-preview — 2026-11-20
+
+### Both platforms
+
+- Translated the Situation menu banner as **Battle Report** and fit the entire
+  **Level Up!** graphic, including the exclamation mark, into one native sprite tile.
+- Shortened terrain labels to fit their display fields. The revised names include
+  **Blocked**, **HQ**, **Tower**, and **Asteroid**.
+- Condensed the early End Phase warning to a single row while keeping the
+  number of units that can still act.
+
+### Vita
+
+- Fixed the prebattle deployment and repositioning prompts. The English
+  instructions and Confirm, Back, and Deploy hints now use the encoding
+  expected by that screen's text renderer.
+- Placed the post-movement **P** marker in a dedicated column before Power
+  in both weapon lists, clear of the weapon names.
+- Shortened **Search**, **Roster**, **Save**, and **Spirits** in Quick Command.
+- Restored the map modifier format that displays a single percent sign.
+- Split battle and persuasion dialogue into individual UTF-8 rows before
+  rendering. This removes the extra conversion through the 96-byte row
+  buffers that could repeat the next line or cut off a word. Two-page
+  attack timing remains in place.
+
+### Validation
+
+- Headless Vita checks passed for the reported dialogue examples, page
+  transitions, and 4,904 matched quote occurrences, including 28 with two
+  pages. All 32 Vita tests passed. The archive check verified eight
+  replacements and 154 identical untouched entries.
+- The PS3 build verified 6,898 translated entries and passed installer
+  integration checks for installation, upgrade, rollback, and restoration.
+- Both ZIPs passed integrity and checksum checks. The maintainer's RPCS3
+  and Vita3K installs were updated and matched the release manifests.
+- In-game confirmation is still needed for the latest Vita layout and
+  dialogue changes, including multi-unit attacks and fast-forward.
+  Vita hardware rePatch compatibility remains unverified.
+
+## PS3 0.1.8-preview / Vita 0.1.9-vita-preview — 2026-11-16
+
+- Restored the original Japanese glyphs for the gray battle forecast
+  indicators, replacing the concatenated Latin placeholders while the
+  indicator labels await a reviewed English treatment.
+- Rebuilt both packages with the matching title-screen version labels.
+
+## PS3 0.1.7-preview / Vita 0.1.8-vita-preview — 2026-11-16
+
+- Corrected the unit names **Rhine X1**, **Bado**, and **Zuu** in the
+  shared English text.
+- Relettered the status tabs, including **Weapon Stats**, to fit their
+  individual labels and avoid overlap.
+- Added the existing **Ally Roster** translation to the Vita menu atlas.
+- Rebuilt the PS3 installer and Vita rePatch ZIP for the screenshot fixes.
 
 ## PS3 0.1.5-preview / Vita 0.1.6-vita-preview — 2026-11-09
 
@@ -414,11 +466,12 @@ feature rather than assigned unrecorded release tags.
   crashes and progression problems with reproduction details.
 - Runtime page timing and visibility need confirmation across attacks,
   counterattacks and multi-unit sequences at normal and fast-forward speed.
-- Team/hero selection should be checked again after the 0.1.1 banner correction.
+- Recheck team and hero selection, prebattle deployment, Quick Command,
+  weapon lists, and the early End Phase prompt across the current previews.
 - Several menus have static or measured fit checks, but passing those checks
   does not prove every font size or animation state displays correctly.
-- Current support is the matching PS3 NPJB00514 files in RPCS3. No other-region,
-  other-revision, real-hardware or Vita compatibility is asserted.
+- The preview targets are Japanese PS3 NPJB00514 in RPCS3 and Vita PCSG00260
+  in Vita3K. Other regions, revisions, and Vita hardware remain unverified.
 - A clean public clone skips two data-dependent paging scans without the
   maintainer's quote report. Full builds and installer integration tests need
   local original game files and maintained build inputs.
