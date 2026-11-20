@@ -9,8 +9,8 @@ for test builds and feedback.**
 
 | Platform | Current preview | Playtest package |
 |---|---|---|
-| PS3 — NPJB00514 | **0.1.2-preview** | Windows RPCS3 patcher; `SRWT1-HD-English-0.1.2-preview.zip` |
-| Vita — PCSG00260 | **0.1.3-vita-preview** | Replacement files in a `rePatch/PCSG00260` folder; filename begins `SRW-HD-Vita-PCSG00260-English-` and ends `-rePatch.zip` |
+| PS3 — NPJB00514 | **0.1.5-preview** | Windows RPCS3 patcher; `SRWT1-HD-English-0.1.5-preview.zip` |
+| Vita — PCSG00260 | **0.1.6-vita-preview** | Replacement files in a `rePatch/PCSG00260` folder; filename begins `SRW-HD-Vita-PCSG00260-English-` and ends `-rePatch.zip` |
 
 The Vita build has automated text, spacing, paging, and packaging checks. Its
 latest runtime changes still need in-game confirmation, especially multi-unit
@@ -30,7 +30,7 @@ battle dialogue, menus, descriptions, and unit information. It also includes:
 - Pixel-aware battle wrapping and second pages, including PS3 multi-unit attacks.
 - A Windows patcher with file checks, backups, upgrades, and restoration.
 
-The Vita port reuses the translation and artwork, with **6,708 translated string
+The Vita port reuses the translation and artwork, with **6,710 translated string
 occurrences**, including 216 moved to added space rather than shortened. It adds:
 
 - Native ARM spacing hooks matching the PS3's 95 measured ASCII glyphs, including tighter `k` and `s`.
@@ -47,6 +47,10 @@ scene, menu, attack, or hardware configuration has been verified in-game.
 
 Both title screens include a small, inset two-line `pk87` / `eng vNUMBER`
 label. The number is baked from the build version.
+
+The latest previews give **Evade** and **Recover** room beside their
+percentages, translate the terrain next to MAP, and fix the Upgrade Item
+placeholder and the team selection prompt.
 
 ## Screenshots
 

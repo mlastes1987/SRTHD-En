@@ -6,6 +6,7 @@ from pathlib import Path
 import struct
 import capstone
 from vita_arm import address_pairs
+from map_strip import vita_changes
 from vita_text import segments
 from vita_runtime import FONT_METRICS
 
@@ -52,6 +53,11 @@ def verify(source,output,report,runtime):
         ins=list(md.disasm(at(output,built,pc,4),pc))
         assert len(ins)==1 and ins[0].mnemonic=='b.w' and int(ins[0].op_str[1:],16)==int(target,16)
     allow(0x81009d3a,4)
+    if runtime.get('map_strip_columns'):
+        for pc, before, after in vita_changes():
+            assert at(source, original, pc, 4) == before
+            assert at(output, built, pc, 4) == after
+            allow(pc, 4)
     changed=0
     for n,(a,b) in enumerate(zip(original,built)):
         before=source[a['off']:a['off']+a['size']]
