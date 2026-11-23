@@ -13,6 +13,8 @@ from vita_gxt import encode, decode, encode_region
 from vita_text import build
 from vita_ui import MENU_REGIONS,team_banner
 from title_version import current,texture,load_font,FONT,number
+from status_tabs import reletter, report_and_level, roster_label, upgrade_labels
+from intermission import verify_rows
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -31,6 +33,7 @@ def main():
     ap.add_argument('--label-font',type=Path,default=FONT,help='Original GCM bitmap font from the shared PS3 workspace')
     args=ap.parse_args()
     number(args.version)
+    print("Intermission help / item rows verified:", verify_rows(args.csv))
     args.output.mkdir(parents=True,exist_ok=True)
     args.work.mkdir(parents=True,exist_ok=True)
     original=args.self_path.read_bytes()
@@ -68,10 +71,21 @@ def main():
                 packed=raw
                 for box in MENU_REGIONS:
                     packed=encode_region(packed,im.crop(box),box,use_region_palette=True)
+                packed=encode_region(packed,roster_label(args.label_font),(0,384,280,448),
+                                     use_region_palette=True)
+                for box, label in upgrade_labels(args.label_font):
+                    packed=encode_region(packed,label,box,use_region_palette=True)
                 replacements[fid]=packed
+            elif fid==138 and not args.basic:
+                replacements[fid]=encode(raw,report_and_level(im,args.label_font))
             else:replacements[fid]=encode(raw,im)
         decode(replacements[fid]).save(preview/f'{fid:05}.png')
     if not args.basic:
+        row=next(r for r in archive.files if int(r['FileName'])==134)
+        raw=archive.payload(row)
+        if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
+        replacements[134]=encode(raw,reletter(decode(raw),args.label_font))
+        decode(replacements[134]).save(preview/'00134.png')
         row=next(r for r in archive.files if int(r['FileName'])==117)
         raw=archive.payload(row)
         if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)

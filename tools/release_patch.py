@@ -6,6 +6,7 @@ No original game files, keys, emulator, or complete translated binaries ship.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 from project_paths import ORIGINAL
 import shutil
@@ -82,23 +83,48 @@ def main():
     ap.add_argument('--output',type=Path,default=ROOT/'release')
     ap.add_argument('--ui-archive',type=Path,default=ROOT/'build/KDATAPS3.translated.CPK')
     ap.add_argument('--unit-archive',type=Path,default=ROOT/'build/PIECE1STPS3.translated.CPK')
-    from title_version import FONT
+    from title_version import FONT, number
     ap.add_argument('--label-font',type=Path,default=FONT)
     args = ap.parse_args()
     import re
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,60}',args.version):
         ap.error('Version must be a simple filename-safe label.')
+    number(args.version)
     import sys
+    build_env = dict(os.environ, SRW_ORIGINAL_DIR=str(args.original.resolve()))
     for command in (
             [str(ROOT/'tools/build.py'),'--proportional'],
             ['-m','unittest','discover','-s','tools','-p','test_battle_pages.py'],
             ['-m','unittest','discover','-s','tools','-p','test_text_import.py'],
             [str(ROOT/'tools/verify_build.py')]):
-        subprocess.run([sys.executable]+command,check=True,cwd=ROOT)
+        subprocess.run([sys.executable]+command,check=True,cwd=ROOT,env=build_env)
     from title_version import archive as stamp_title
+    from cpk import Cpk, crilayla_decompress
+    from gcm_texture import decode, encode
+    from status_tabs import reletter, report_and_level, upgrade_labels
+
+    def texture_payload(archive, file_id):
+        row = next(r for r in archive.files if int(r['FileName'].split('.')[0]) == file_id)
+        raw = archive.payload(row)
+        return crilayla_decompress(raw) if raw.startswith(b'CRILAYLA') else raw
+
+    original_ui = args.original/'USRDIR/DATA/KURODATA/KDATAPS3.CPK'
+    original_archive = Cpk(str(original_ui))
+    translated_archive = Cpk(str(args.ui_archive))
+    tabs = texture_payload(original_archive, 134)
+    notifications = texture_payload(translated_archive, 138)
+    menus = texture_payload(translated_archive, 133)
+    menu_atlas = decode(menus)
+    for box, label in upgrade_labels(args.label_font):
+        menu_atlas.paste(label, box)
+    extra = {
+        133: encode(menus, menu_atlas),
+        134: encode(tabs, reletter(decode(tabs), args.label_font)),
+        138: encode(notifications, report_and_level(decode(notifications), args.label_font)),
+    }
     stamped_ui=ROOT/'build/KDATAPS3.title-version.CPK'
     title_label=stamp_title(args.ui_archive,stamped_ui,'ps3',args.version,args.label_font,
-                           args.original/'USRDIR/DATA/KURODATA/KDATAPS3.CPK')
+                           original_ui,extra=extra)
     folder = args.output/f'SRWT1-HD-English-{args.version}'
     if folder.exists():
         ap.error('Release folder exists; use a new version or output folder.')

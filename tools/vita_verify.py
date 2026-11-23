@@ -9,6 +9,7 @@ from vita_arm import address_pairs
 from map_strip import vita_changes
 from vita_text import segments
 from vita_runtime import FONT_METRICS
+from vita_ui import playtest_layout_changes
 
 
 def verify(source,output,report,runtime):
@@ -26,7 +27,7 @@ def verify(source,output,report,runtime):
         off=int(e['offset'],16)
         s=next(s for s in original if s['type']==1 and s['off']<=off<s['off']+s['size'])
         va=s['va']+off-s['off']
-        expected=e['english'][0].encode(e['encoding'])+b'\0'
+        expected=e['english'][0].encode(e.get('output_encoding', e['encoding']))+b'\0'
         if e['status']=='translated':allow(va,e['slot'])
         elif e['status']=='relocated':moves[va]=int(e['target_va'],16)
         else:raise AssertionError(f'Unresolved text: {e}')
@@ -48,16 +49,22 @@ def verify(source,output,report,runtime):
             assert after[(lo,hi)]==moves[target],(hex(target),hex(lo))
             allow(lo,4);allow(hi,4);immediate_count+=1
     md=capstone.Cs(capstone.CS_ARCH_ARM,capstone.CS_MODE_THUMB)
-    for pc,target in runtime['hooks'].items():
-        pc=int(pc,16);allow(pc,4)
-        ins=list(md.disasm(at(output,built,pc,4),pc))
-        assert len(ins)==1 and ins[0].mnemonic=='b.w' and int(ins[0].op_str[1:],16)==int(target,16)
+    for group, mnemonic in (('hooks','b.w'), ('call_hooks','bl')):
+        for pc,target in runtime.get(group, {}).items():
+            pc=int(pc,16);allow(pc,4)
+            ins=list(md.disasm(at(output,built,pc,4),pc))
+            assert len(ins)==1 and ins[0].mnemonic==mnemonic and int(ins[0].op_str[1:],16)==int(target,16)
     allow(0x81009d3a,4)
     if runtime.get('map_strip_columns'):
         for pc, before, after in vita_changes():
             assert at(source, original, pc, 4) == before
             assert at(output, built, pc, 4) == after
             allow(pc, 4)
+    if runtime.get('playtest_layout'):
+        for pc, before, after in playtest_layout_changes():
+            assert at(source, original, pc, len(before)) == before
+            assert at(output, built, pc, len(after)) == after
+            allow(pc, len(after))
     changed=0
     for n,(a,b) in enumerate(zip(original,built)):
         before=source[a['off']:a['off']+a['size']]
@@ -79,12 +86,13 @@ def verify(source,output,report,runtime):
         assert len(text.encode('utf-8'))+7<=104,e
         assert len(lines)<=4,e
         for i,line in enumerate(lines):
+            assert len(line.encode('utf-8')) <= 95,e
             width=sum(int(metrics[c]['advance']*38+metrics[c]['adjust_px']) if c in metrics else 38 for c in line)
             assert width+(38 if i==0 else 0)<=800,(e,width)
         quotes.append((len(lines)+1)//2)
     return dict(text_entries=len(report['entries']),moved_strings=len(moves),
                 updated_table_pointers=pointer_count,updated_instruction_pairs=immediate_count,
-                verified_hooks=len(runtime['hooks']),explained_changed_loaded_bytes=changed,
+                verified_hooks=len(runtime['hooks'])+len(runtime.get('call_hooks', {})),explained_changed_loaded_bytes=changed,
                 battle_quotes=len(quotes),two_page_quotes=sum(p==2 for p in quotes),
                 bss_zero_verified=True,comment_segment_preserved=True)
 

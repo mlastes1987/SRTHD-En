@@ -9,6 +9,7 @@ from vita_arm import branch
 from map_strip import vita_changes
 from vita_self import repack
 from vita_text import segments
+from vita_ui import playtest_layout_changes
 
 CAVE=0x81149900
 FONT_METRICS=Path(__file__).with_name('vita_font_metrics.json')
@@ -18,6 +19,10 @@ HOOKS={0x81009ccc:'measure_class',0x81009cd2:'measure_default',
 HOOKS.update({0x810766a6:'page_init',0x810779c6:'page_update',0x810770fe:'page_render'})
 HOOKS.update({0x81072854:'faction_ally_big',0x810728ce:'faction_enemy_small',
               0x81072938:'faction_ally_small',0x810729a2:'faction_enemy_big'})
+HOOKS[0x81017434] = 'split_quote_rows'
+CALL_HOOKS = {0x8101748a:'copy_quote_row', 0x810174a2:'copy_quote_row',
+              0x8100f93e:'draw_deploy_choices', 0x8100feda:'draw_deploy_choices',
+              0x8100fe5c:'draw_deploy_start'}
 
 
 def symbols(elf):
@@ -75,6 +80,8 @@ def assemble(work):
              'return_draw_advance':0x81009568,'return_page_init':0x810766aa,
              'return_page_update':0x810779ca,'return_page_hold':0x81079d0e,
              'return_page_render':0x81077102,
+             'return_quote_rows':0x81017464,
+             'draw_raw_left':0x81009d18,
              **{'return_'+name:pc+4 for pc,name in HOOKS.items() if name.startswith('faction_')}}
     subprocess.run([str(linker),'-Ttext='+hex(CAVE),'--entry='+hex(CAVE),
                     *[f'--defsym={k}={v:#x}' for k,v in returns.items()],
@@ -94,10 +101,10 @@ def patch(source,original,work=Path('work/vita')):
     payload.extend(b'\0'*(start+len(blob)-len(payload)))
     payload[start:start+len(blob)]=blob
     old=segments(original)[0]
-    for pc,name in HOOKS.items():
+    for pc,name in (HOOKS | CALL_HOOKS).items():
         pos=pc-seg['va'];oldpos=old['off']+pos
         if payload[pos:pos+4]!=original[oldpos:oldpos+4]:raise ValueError(f'Hook changed: {pc:#x}')
-        payload[pos:pos+4]=branch(pc,labels[name])
+        payload[pos:pos+4]=branch(pc,labels[name],link=pc in CALL_HOOKS)
     # Always use native width measurement in the centered text wrapper.
     pos=0x81009d3a-seg['va']
     if payload[pos:pos+4]!=original[old['off']+pos:old['off']+pos+4]:raise ValueError('Center hook changed')
@@ -107,11 +114,17 @@ def patch(source,original,work=Path('work/vita')):
         if payload[pos:pos + 4] != before:
             raise ValueError(f'Unexpected Vita MAP coordinate at {pc:#x}')
         payload[pos:pos + 4] = after
+    for pc, before, after in playtest_layout_changes():
+        pos = pc - seg['va']
+        if payload[pos:pos + len(before)] != before:
+            raise ValueError(f'Unexpected Vita menu instruction at {pc:#x}')
+        payload[pos:pos + len(after)] = after
     output=repack(source,{0:bytes(payload)})
     report=dict(cave=hex(CAVE),payload_bytes=len(blob),end=hex(end),
                 hooks={hex(pc):hex(labels[name]) for pc,name in HOOKS.items()},
+                call_hooks={hex(pc):hex(labels[name]) for pc,name in CALL_HOOKS.items()},
                 glyphs=95,ks_adjustment=-1,
-                centered_measurement=True,map_strip_columns=True,
+                centered_measurement=True,map_strip_columns=True,playtest_layout=True,
                 paging=dict(ticks_per_page=120,buffers=['0x8125cdf4','0x8125ce6d'],
                             pointer='0x8125d0cc',max_lines=4,max_pages=2))
     (work/'runtime_report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')

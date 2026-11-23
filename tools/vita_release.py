@@ -54,12 +54,17 @@ That tool verifies supported file hashes, preserves original backups, and
 records the installed build for later upgrades.
 
 WHAT TO TEST
-The build includes proportional spacing matching the PS3 measurements,
-two-page attack/counter dialogue, English UI artwork, and selection-label
-overlap fixes. Automated checks cover text, pointers, ARM instructions,
-archive contents, installation, and restoration. In-game behavior of the
-latest spacing/paging changes still needs confirmation, especially multi-unit
-attacks, fast-forward, page transitions, save/load dialogs, and map returns.
+Check the intermission help bar, the Upgrade Unit and Upgrade Item headings,
+and the item preview and confirmation panels for Haro, Aiming Corrector,
+and other upgrades. Check the (End) label after clearing a map.
+
+Check the prebattle deployment instructions and button hints, Battle Report
+and Level Up! banners, Quick Command choices, early End Phase warning,
+terrain names and percentages, and the P column in both weapon lists.
+Please check longer attack and persuasion lines for duplicated or clipped
+text and confirm that both pages of a multi-unit attack display in order.
+Automated checks cover text, pointers, ARM instructions, archive contents,
+installation, and restoration. The layouts still need an in-game pass.
 
 REPORTS AND CURRENT BUILDS
 https://discord.gg/DwR2jxj5b

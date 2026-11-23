@@ -16,6 +16,8 @@ import subprocess
 import sys
 from map_strip import patch_ps3
 from ps3_terrain import translate_terrain
+from map_end import patch_ps3 as patch_map_end
+from intermission import verify_rows
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from project_paths import ORIGINAL, RPCS3_DIR
@@ -41,6 +43,7 @@ def main(argv):
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     os.makedirs(os.path.join(ROOT, "shots"), exist_ok=True)
 
+    print("Intermission help / item rows verified:", verify_rows(CSV))
     run(sys.executable, os.path.join(ROOT, "tools", "csvtool.py"), "apply",
         TEXT_JSON, CSV, TR_JSON)
     run(sys.executable, os.path.join(ROOT, "tools", "srwtext.py"), "import",
@@ -60,6 +63,7 @@ def main(argv):
 
     if "--proportional" in argv:
         patch_ps3(OUT)
+        patch_map_end(OUT)
         run(sys.executable, os.path.join(ROOT, "tools", "proportional_font.py"))
         run(sys.executable, os.path.join(ROOT, "tools", "battle_pages.py"))
 

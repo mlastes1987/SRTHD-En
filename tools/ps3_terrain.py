@@ -6,7 +6,7 @@ TABLE_OFFSET = 0x51432C
 RECORD_SIZE = 40
 NAME_SIZE = 16
 NAMES = (
-    ("進入不可", "Impassable"),
+    ("進入不可", "Blocked"),
     ("平地", "Plains"),
     ("森", "Forest"),
     ("海", "Sea"),
@@ -15,10 +15,10 @@ NAMES = (
     ("床", "Floor"),
     ("柱", "Pillar"),
     ("穴", "Pit"),
-    ("タワー／基地", "Tower / Base"),
-    ("本拠地", "Home Base"),
+    ("タワー／基地", "Tower"),
+    ("本拠地", "HQ"),
     ("宇宙空間", "Space"),
-    ("暗礁宙域", "Asteroid Field"),
+    ("暗礁宙域", "Asteroid"),
     ("要塞", "Fortress"),
     ("川", "River"),
     ("池", "Pond"),

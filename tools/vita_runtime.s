@@ -239,6 +239,59 @@ faction_enemy_big:
     vldr s0,faction_positions+12
     b.w return_faction_enemy_big
 
+// The row renderer already converts UTF-8 using its 1 KiB scratch buffer.
+// Split the raw quote first, so neither 96-byte row receives expanded glyphs.
+split_quote_rows:
+    mov r0,r4
+    movw r1,#0x6a40
+    movt r1,#0x811f
+    movs r2,#95
+1:  ldrb r3,[r0],#1
+    cbz r3,3f
+    cmp r3,#10
+    beq 2f
+    cmp r2,#0
+    beq 1b
+    strb r3,[r1],#1
+    subs r2,#1
+    b 1b
+2:  movs r3,#0
+    strb r3,[r1]
+    movw r1,#0x6b40
+    movt r1,#0x811f
+    movs r2,#96
+    bl copy_quote_row
+    b.w return_quote_rows
+3:  strb r3,[r1]
+    b.w return_quote_rows
+
+.thumb_func
+copy_quote_row:
+    subs r2,#1
+1:  cbz r2,2f
+    ldrb r3,[r0],#1
+    cbz r3,2f
+    cmp r3,#10
+    beq 2f
+    strb r3,[r1],#1
+    subs r2,#1
+    b 1b
+2:  movs r3,#0
+    strb r3,[r1]
+    bx lr
+
+draw_deploy_choices:
+    movs r3,#0
+    movt r3,#0x43e8 // 464, after the Confirm icon at 432
+    vmov s0,r3
+    b.w draw_raw_left
+
+draw_deploy_start:
+    movs r3,#0
+    movt r3,#0x4334 // 180, after the Start icon at 142
+    vmov s0,r3
+    b.w draw_raw_left
+
 .balign 4
 faction_positions:
     .incbin "work/vita/faction_positions.bin"

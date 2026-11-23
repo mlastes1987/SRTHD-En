@@ -394,7 +394,7 @@ patcher's Restore originals function. Do not use it for normal releases.
 With maintained translation inputs and approved archives present:
 
 ```powershell
-& $py tools/release_patch.py --version 0.1.5-preview
+& $py tools/release_patch.py --version 0.1.10-preview
 ```
 
 Use a new version label; this is an example, not a claim that 0.1.2 has been
@@ -402,7 +402,7 @@ released. Defaults are `build/KDATAPS3.translated.CPK` and
 `build/PIECE1STPS3.translated.CPK`. For a different approved UI output:
 
 ```powershell
-& $py tools/release_patch.py --version 0.1.5-preview --ui-archive build/KDATAPS3.team-fixed.CPK --unit-archive build/PIECE1STPS3.translated.CPK
+& $py tools/release_patch.py --version 0.1.10-preview --ui-archive build/KDATAPS3.team-fixed.CPK --unit-archive build/PIECE1STPS3.translated.CPK
 ```
 
 Options include `--original GAME_ROOT`, `--output DIRECTORY`, `--ui-archive`
@@ -419,8 +419,8 @@ inspect the error before retrying; a partly prepared version folder may remain.
 Explicit integration tests, using an existing release folder:
 
 ```powershell
-& $py tools/test_release.py release/SRWT1-HD-English-0.1.5-preview
-& $py tools/test_release_decrypt.py release/SRWT1-HD-English-0.1.5-preview "D:\Emulators\RPCS3\rpcs3.exe"
+& $py tools/test_release.py release/SRWT1-HD-English-0.1.10-preview
+& $py tools/test_release_decrypt.py release/SRWT1-HD-English-0.1.10-preview "D:\Emulators\RPCS3\rpcs3.exe"
 ```
 
 The first script checks actual C# install/restore behavior on temporary copies,
@@ -444,7 +444,7 @@ SELF** action; these tools do not supply game files or keys.
 & $py -m unittest discover -s tools -p 'test_vita*.py' -v
 & $py tools/vita_build.py --game local/vita/original --self local/vita/eboot.original.self
 & $py tools/vita_verify.py --source local/vita/eboot.original.self
-& $py tools/vita_release.py --version 0.1.6-vita-preview
+& $py tools/vita_release.py --version 0.1.11-vita-preview
 ```
 
 Provide an ARM-capable clang with ld.lld and llvm-objcopy on PATH or beside
@@ -579,7 +579,7 @@ the original GCM G8B8 font entry at `work/tabata/00000.bin`; pass `--font`
 to use a different path. No font or game texture is included in the repo.
 
 ```powershell
-python tools/title_version.py --platform ps3 --version 0.1.5-preview --archive build/KDATAPS3.translated.CPK --background-archive local/ps3/NPJB00514/USRDIR/DATA/KURODATA/KDATAPS3.CPK --output build/KDATAPS3.versioned.CPK
+python tools/title_version.py --platform ps3 --version 0.1.10-preview --archive build/KDATAPS3.translated.CPK --background-archive local/ps3/NPJB00514/USRDIR/DATA/KURODATA/KDATAPS3.CPK --output build/KDATAPS3.versioned.CPK
 ```
 
 Use a clean original `--background-archive` for repeat builds so an older
@@ -601,6 +601,12 @@ runtime build patches the matching Thumb immediates and checks them in
 `vita_verify.py`. `ps3_terrain.py` writes English names into the 17 fixed
 terrain records, preserving the data that follows each name. Vita terrain
 names are set in `vita_text_overrides.json`.
+
+`intermission.py` checks fixed-height help and item-effect rows in the
+maintainer translation CSV before either build. `map_end.py` patches
+both map-clear draw sites on each platform to right-align **(End)**.
+`status_tabs.py` draws the status tabs, **Battle Report**, **Level Up!**,
+and upgrade headings from the original bitmap font during packaging.
 
 The maintained translation CSV supplies the text for both builds. These
 are the relevant row values for the current playtest fixes.

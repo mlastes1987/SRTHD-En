@@ -4,9 +4,27 @@ This changelog covers packaged translation previews and public tooling.
 Earlier work is recorded under the first packaged preview and the development
 history below.
 
-The current previews are **PS3 0.1.9-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.10-vita-preview** (PCSG00260 / Vita3K). Check Discord for build
+The current previews are **PS3 0.1.10-preview** (NPJB00514 / RPCS3) and
+**Vita 0.1.11-vita-preview** (PCSG00260 / Vita3K). Check Discord for build
 availability and playtest feedback. [Join the project Discord](https://discord.gg/DwR2jxj5b)
+
+## PS3 0.1.10-preview / Vita 0.1.11-vita-preview — 2026-11-22
+
+- Fit the eight intermission help descriptions on one row each and checked
+  all 50 item-effect rows against the native text fields.
+- Kept Aiming Corrector's hit bonus above the confirmation's target-unit row.
+  Haro uses a short item preview and lists all seven stat increases across
+  the confirmation's two native rows.
+- Translated the **Upgrade Unit** and **Upgrade Item** banners on both
+  platforms, preserving the rest of the menu atlas.
+- Right-aligned **(End)** inside the map-clear preview on both platforms.
+- Published the build tools for these changes and the preceding playtest
+  fixes, including Vita dialogue row handling, deployment hints, Quick
+  Command labels, and weapon-list marker placement. Builds use the updated
+  maintainer translation CSV for the shared text.
+- Rebuilt both packages. The PS3 installer integration tests and all 32 Vita
+  tests passed, and both emulator installs matched their release manifests.
+  The changed screens still need an in-game visual pass.
 
 ## PS3 0.1.9-preview / Vita 0.1.10-vita-preview — 2026-11-20
 

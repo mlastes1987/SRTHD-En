@@ -90,10 +90,13 @@ def build(source, csv_path, relocate=False, overrides=None):
             english={override['english']}
         entry = dict(offset=hex(off), encoding=enc, japanese=japanese,
                      english=sorted(english))
+        output_encoding = override.get('output_encoding', enc) if override else enc
+        if output_encoding != enc:
+            entry['output_encoding'] = output_encoding
         status = 'ambiguous' if len(english) != 1 else 'ready'
         replacement = None
         if status == 'ready':
-            try: replacement = next(iter(english)).encode(enc)+b'\0'
+            try: replacement = next(iter(english)).encode(output_encoding)+b'\0'
             except UnicodeEncodeError:
                 status = 'encoding'
         va = seg['va']+off-seg['off']
@@ -130,7 +133,7 @@ def build(source, csv_path, relocate=False, overrides=None):
             off=int(e['offset'],16)
             seg=next(s for s in loads if s['off']<=off<s['off']+s['size'])
             va=seg['va']+off-seg['off']
-            raw=e['english'][0].encode(e['encoding'])+b'\0'
+            raw=e['english'][0].encode(e.get('output_encoding', e['encoding']))+b'\0'
             refs=references.get(va,[])
             code_refs=[p for p in pairs if p[0]==va]
             if not refs and not code_refs:
@@ -157,7 +160,7 @@ def build(source, csv_path, relocate=False, overrides=None):
             va=int(e['target_va'],16) if e['status']=='relocated' else old_seg['va']+old_off-old_seg['off']
             new_seg=next(s for s in segments(data) if s['type']==1 and s['va']<=va<s['va']+s['size'])
             off=new_seg['off']+va-new_seg['va']
-            expected = e['english'][0].encode(e['encoding'])+b'\0'
+            expected = e['english'][0].encode(e.get('output_encoding', e['encoding']))+b'\0'
             assert data[off:off+len(expected)] == expected, e
     report['counts'] = dict(collections.Counter(e['status'] for e in report['entries']))
     report['output_sha256'] = hashlib.sha256(data).hexdigest()

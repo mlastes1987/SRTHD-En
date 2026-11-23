@@ -124,6 +124,32 @@ class RuntimeTests(unittest.TestCase):
         u.reg_write(UC_ARM_REG_R3,1);self.call_worker(u,'page_tick')
         self.assertEqual(u.reg_read(UC_ARM_REG_R0),0)
 
+    def test_dialogue_rows_are_copied_once_and_stop_at_the_next_row(self):
+        examples = [
+            ("I'll let you shoot me now. What's", "　wrong? Are you afraid?"),
+            ("Damn! As if Boss Borot would be", "　beaten so easily!"),
+            ("A pretty girl's invitation, tempting,", "　but no!"),
+            ("First page", "Second row", "Next page", "Final row"),
+            ("Only one line",),
+        ]
+        for lines in examples:
+            u = self.machine()
+            source = 0x70002000
+            u.mem_write(source, ("\n".join(lines) + "\0").encode("utf-8"))
+            u.reg_write(UC_ARM_REG_R4, source)
+            u.emu_start(self.labels['split_quote_rows'] | 1, 0x81017464, count=2000)
+            self.assertEqual(u.reg_read(UC_ARM_REG_PC), 0x81017464)
+            for index, (staging, display) in enumerate(((0x811f6a40, 0x811f6978), (0x811f6b40, 0x811f69d8))):
+                expected = (lines[index] if index < len(lines) else "").encode("utf-8")
+                u.mem_write(display, b'x' * 96)
+                u.reg_write(UC_ARM_REG_R0, staging)
+                u.reg_write(UC_ARM_REG_R1, display)
+                u.reg_write(UC_ARM_REG_R2, 96)
+                self.call_worker(u, 'copy_quote_row')
+                actual = bytes(u.mem_read(display, 96)).split(b'\0', 1)[0]
+                self.assertEqual(actual, expected)
+                self.assertEqual(bytes(u.mem_read(staging, 96)).rstrip(b'\0'), expected)
+
     def test_native_update_hook_uses_delta_and_returns_running(self):
         u=self.machine();base=0x8125cdf4;self.prepare_pages(u,base)
         for elapsed in range(1,241):

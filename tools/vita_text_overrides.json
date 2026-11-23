@@ -1,48 +1,48 @@
 {
   "0x12258c": {
     "japanese": "覚",
-    "english": "WA",
-    "reason": "PS3 neighboring literal sequence; score 11"
+    "english": "覚",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x122590": {
     "japanese": "手",
-    "english": "ME",
-    "reason": "PS3 neighboring literal sequence; score 12"
+    "english": "手",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x122594": {
     "japanese": "共",
-    "english": "SE",
-    "reason": "PS3 neighboring literal sequence; score 13"
+    "english": "共",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x122598": {
     "japanese": "乱",
-    "english": "JA",
-    "reason": "PS3 neighboring literal sequence; score 14"
+    "english": "乱",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x12259c": {
     "japanese": "熱",
-    "english": "BL",
-    "reason": "PS3 neighboring literal sequence; score 14"
+    "english": "熱",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x1225a0": {
     "japanese": "閃",
-    "english": "FL",
-    "reason": "PS3 neighboring literal sequence; score 13"
+    "english": "閃",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x1225a4": {
     "japanese": "鉄",
-    "english": "IR",
-    "reason": "PS3 neighboring literal sequence; score 12"
+    "english": "鉄",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x1225a8": {
     "japanese": "集",
-    "english": "FO",
-    "reason": "PS3 neighboring literal sequence; score 12"
+    "english": "集",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x1225ac": {
     "japanese": "必",
-    "english": "SU",
-    "reason": "PS3 neighboring literal sequence; score 11"
+    "english": "必",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x122788": {
     "japanese": "精神コマンド",
@@ -446,18 +446,18 @@
   },
   "0x12cd0c": {
     "japanese": "部隊表",
-    "english": "Unit Roster",
-    "reason": "PS3 neighboring literal sequence; score 14"
+    "english": "Roster",
+    "reason": "Quick Command option label"
   },
   "0x12cd18": {
     "japanese": "途中セーブ",
-    "english": "Battle Save",
-    "reason": "PS3 neighboring literal sequence; score 14"
+    "english": "Save",
+    "reason": "Quick Command option label"
   },
   "0x12cd74": {
     "japanese": "精神コマンド",
-    "english": "Spirit Command",
-    "reason": "PS3 neighboring literal sequence; score 14"
+    "english": "Spirits",
+    "reason": "Quick Command option label"
   },
   "0x12cd88": {
     "japanese": "能力",
@@ -606,18 +606,18 @@
   },
   "0x122580": {
     "japanese": "突",
-    "english": "RU",
-    "reason": "Reviewed UI/terrain label or diagnostic message context"
+    "english": "突",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x122588": {
     "japanese": "狙",
-    "english": "SN",
-    "reason": "Reviewed UI/terrain label or diagnostic message context"
+    "english": "狙",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x1225b0": {
     "japanese": "加",
-    "english": "AC",
-    "reason": "Reviewed UI/terrain label or diagnostic message context"
+    "english": "加",
+    "reason": "Preserve the original one-character combat indicator in its shared display slot."
   },
   "0x12322c": {
     "japanese": "失敗",
@@ -696,7 +696,7 @@
   },
   "0x18f938": {
     "japanese": "本拠地",
-    "english": "Home Base",
+    "english": "HQ",
     "reason": "Reviewed UI/terrain label or diagnostic message context",
     "inline_capacity": 16
   },
@@ -720,9 +720,9 @@
   },
   "0x122ca8": {
     "japanese": "%+d％",
-    "english": "%+d%%",
+    "english": "%+d％",
     "encoding": "utf-8",
-    "reason": "Vita-specific source literal or fixed terrain-name record"
+    "reason": "The map formatter expects a full-width literal percent sign"
   },
   "0x122e54": {
     "japanese": "メモリーカード",
@@ -846,7 +846,7 @@
   },
   "0x18f7a8": {
     "japanese": "進入不可",
-    "english": "Impassable",
+    "english": "Blocked",
     "encoding": "cp932",
     "reason": "Vita-specific source literal or fixed terrain-name record",
     "inline_capacity": 16
@@ -902,7 +902,7 @@
   },
   "0x18f910": {
     "japanese": "タワー／基地",
-    "english": "Tower / Base",
+    "english": "Tower",
     "encoding": "cp932",
     "reason": "Vita-specific source literal or fixed terrain-name record",
     "inline_capacity": 16
@@ -916,7 +916,7 @@
   },
   "0x18f988": {
     "japanese": "暗礁宙域",
-    "english": "Asteroid Field",
+    "english": "Asteroid",
     "encoding": "cp932",
     "reason": "Vita-specific source literal or fixed terrain-name record",
     "inline_capacity": 16
@@ -958,5 +958,34 @@
     "japanese": "忠義＋%d、魅力＋%d　でよろしいですか？",
     "english": "Loyalty +%d, Charm +%d. OK?",
     "reason": "Bonus confirmation uses two fixed single-line native text rows; preserve all six values without wrapping"
+  },
+  "0xd5200": {
+    "japanese": "＜出撃選択＞　入れ替えるユニット／場所を指定します。",
+    "english": "Ｐｉｃｋ　ａ　ｕｎｉｔ　ｏｒ　ｓｌｏｔ　ｔｏ　ｓｗａｐ．",
+    "output_encoding": "cp932",
+    "reason": "Raw deployment font input"
+  },
+  "0xd5250": {
+    "japanese": "　：決定　　　：戻る",
+    "english": "Ｃｏｎｆｉｒｍ　　　Ｂａｃｋ",
+    "output_encoding": "cp932",
+    "reason": "Raw deployment font input"
+  },
+  "0xd5270": {
+    "japanese": "＜出撃選択＞　並び替えるユニットを指定します。　　　",
+    "english": "Ｐｉｃｋ　ａ　ｕｎｉｔ　ｔｏ　ｍｏｖｅ．",
+    "output_encoding": "cp932",
+    "reason": "Raw deployment font input"
+  },
+  "0xd52c0": {
+    "japanese": "　　　　　　　：出撃",
+    "english": "Ｄｅｐｌｏｙ",
+    "output_encoding": "cp932",
+    "reason": "Raw deployment font input"
+  },
+  "0x12ccfc": {
+    "japanese": "精神検索",
+    "english": "Search",
+    "reason": "Quick Command option label"
   }
 }

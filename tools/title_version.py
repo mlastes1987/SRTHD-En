@@ -38,7 +38,7 @@ def load_font(path):
                              Image.frombytes('L',(4096,1120),raw[1::2]))
 
 
-def line(text,font,metrics):
+def line(text,font,metrics,size=SIZE):
     width=sum(round(metrics[c]['advance']*32+metrics[c].get('adjust_px',0)) for c in text)
     mask=Image.new('L',(width,32));x=0
     for c in text:
@@ -48,7 +48,7 @@ def line(text,font,metrics):
             glyph=font.crop((gx+box[0],gy,gx+box[2],gy+32))
             mask.paste(glyph,(x,0))
         x+=round(m['advance']*32+m.get('adjust_px',0))
-    return mask.resize((max(1,round(width*SIZE/32)),SIZE),Image.Resampling.LANCZOS)
+    return mask.resize((max(1,round(width*size/32)),size),Image.Resampling.LANCZOS)
 
 
 def screen(atlas):
@@ -102,28 +102,28 @@ def texture(raw,platform,version,font):
     return packed,screen(actual),report
 
 
-def archive(source,output,platform,version,font_path=FONT,background=None):
+def archive(source,output,platform,version,font_path=FONT,background=None,extra=None):
     if Path(source).resolve()==Path(output).resolve():raise ValueError('Use a separate output archive')
-    source=Cpk(str(source));replacements={};report=None;preview=None
+    source=Cpk(str(source));replacements=dict(extra or {});report=None;preview=None
     clean=Cpk(str(background)) if background else source
     for row in clean.files:
         if int(row['FileName'].split('.')[0])==117:
             raw=clean.payload(row)
             if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
             replacements[117],preview,report=texture(raw,platform,version,load_font(font_path))
-    if not replacements:raise ValueError('Title background entry 117 missing')
+    if report is None:raise ValueError('Title background entry 117 missing')
     Path(output).parent.mkdir(parents=True,exist_ok=True)
     source.rebuild(replacements,str(output));built=Cpk(str(output))
     rows={int(r['FileName'].split('.')[0]):r for r in source.files}
     for row in built.files:
         fid=int(row['FileName'].split('.')[0]);raw=built.payload(row)
-        if fid==117:
+        if fid in replacements:
             if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
-            if raw!=replacements[117]:raise ValueError('Title replacement roundtrip failed')
+            if raw!=replacements[fid]:raise ValueError(f'Texture {fid} replacement roundtrip failed')
         elif raw!=source.payload(rows[fid]):raise ValueError('Unrelated archive entry changed')
     preview.save(str(output)+'.title.png')
     report.update(platform=platform,output_sha256=hashlib.sha256(Path(output).read_bytes()).hexdigest(),
-                  unchanged_entries=len(rows)-1)
+                  unchanged_entries=len(rows)-len(replacements))
     Path(str(output)+'.title.json').write_text(json.dumps(report,indent=2)+'\n')
     return report
 
