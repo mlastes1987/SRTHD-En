@@ -9,8 +9,8 @@ and share feedback on [Discord](https://discord.gg/DwR2jxj5b).
 
 | Platform | Current preview | Playtest package |
 |---|---|---|
-| PS3 — NPJB00514 | **0.1.9-preview** | Windows RPCS3 patcher; `SRWT1-HD-English-0.1.9-preview.zip` |
-| Vita — PCSG00260 | **0.1.10-vita-preview** | Replacement files in a `rePatch/PCSG00260` folder; `SRW-HD-Vita-PCSG00260-English-0.1.10-vita-preview-rePatch.zip` |
+| PS3 — NPJB00514 | **0.1.10-preview** | Windows RPCS3 patcher (`SRWT1-HD-English-0.1.10-preview.zip`) |
+| Vita — PCSG00260 | **0.1.11-vita-preview** | rePatch overlay (`SRW-HD-Vita-PCSG00260-English-0.1.11-vita-preview-rePatch.zip`) |
 
 The Vita build has automated text, spacing, paging, archive, and packaging
 checks. The current Vita layout and dialogue fixes still need in-game
@@ -31,7 +31,7 @@ battle dialogue, menus, descriptions, and unit information. It also includes:
 - A Windows patcher with file checks, backups, upgrades, and restoration.
 
 The Vita port reuses the translation and artwork, with **6,710 translated string
-occurrences**, including 203 relocated to fit the English text. It adds:
+occurrences**, including 202 relocated to fit the English text. It adds:
 
 - Native ARM spacing hooks matching the PS3's 95 measured ASCII glyphs, including tighter `k` and `s`.
 - Two-page attack/counter dialogue support and native fast-forward timing.
@@ -44,6 +44,18 @@ occurrences**, including 203 relocated to fit the English text. It adds:
 
 Both title screens include a small, inset two-line `pk87` / `eng vNUMBER`
 label. The number is baked from the build version.
+
+### November 22, 2026 playtest update
+
+Both builds keep intermission help on one line and fit upgrade effects inside
+their panels. **Aiming Corrector** shows its hit bonus above the target unit,
+and **Haro** shows a short preview with all seven stat increases listed in
+the confirmation. The **Upgrade Unit** and **Upgrade Item** banners are now
+in English, and **(End)** aligns to the right inside the map-clear box.
+
+Headless checks passed for all eight intermission help descriptions, 50 item
+effect rows, and both release packages. The updated layouts are ready for
+an in-game visual check.
 
 ### November 20, 2026 playtest update
 
@@ -95,9 +107,11 @@ Use the **Vita rePatch ZIP** for this platform. It contains a standard
 - **Vita hardware:** follow the [Vita playtest guide](docs/VITA_INSTALL.md) to place the overlay under `ux0:rePatch/PCSG00260` with a working rePatch plugin.
 - **Vita3K:** back up the two original files, then copy the contents of `rePatch/PCSG00260` into the installed `ux0/app/PCSG00260` folder. The guide also covers optional checked installation with Python.
 
-Please test deployment, Quick Command, weapon lists, and early End Phase
-on Vita. Please also check long attack and persuasion quotes, multi-unit
-attacks, page transitions, fast-forward, and the return to the map.
+On both platforms, please check the intermission help bar, the Haro and
+Aiming Corrector preview and confirmation panels, and the **(End)** label
+after clearing a map. On Vita, please also check deployment, Quick Command,
+weapon lists, early End Phase, and longer battle and persuasion dialogue,
+including page transitions and fast-forward.
 Include the **platform, title ID, build version, emulator version or Vita
 firmware, episode, unit/attack or menu, and reproduction steps**. Screenshots
 help with missing, cut-off, or overlapping text.
