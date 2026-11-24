@@ -13,8 +13,9 @@ from vita_gxt import encode, decode, encode_region
 from vita_text import build
 from vita_ui import MENU_REGIONS,team_banner
 from title_version import current,texture,load_font,FONT,number
-from status_tabs import reletter, report_and_level, roster_label, upgrade_labels
+from status_tabs import command_labels, reletter, report_and_level, roster_label, upgrade_labels
 from intermission import verify_rows
+from unit_list_banner import UNIT_LIST_BOX, patch as unit_list_banner
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -75,6 +76,8 @@ def main():
                                      use_region_palette=True)
                 for box, label in upgrade_labels(args.label_font):
                     packed=encode_region(packed,label,box,use_region_palette=True)
+                for box, label in command_labels(args.label_font):
+                    packed=encode_region(packed,label,box,use_region_palette=box != UNIT_LIST_BOX)
                 replacements[fid]=packed
             elif fid==138 and not args.basic:
                 replacements[fid]=encode(raw,report_and_level(im,args.label_font))
@@ -95,6 +98,10 @@ def main():
         raw=archive.payload(row)
         if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
         replacements[32]=team_banner(raw)
+        row=next(r for r in archive.files if int(r['FileName'])==53)
+        raw=archive.payload(row)
+        if raw.startswith(b'CRILAYLA'):raw=crilayla_decompress(raw)
+        replacements[53]=unit_list_banner(raw)
     output_archive=args.output/'KDataVITA.cpk'
     archive.rebuild(replacements,str(output_archive))
     built=Cpk(str(output_archive))

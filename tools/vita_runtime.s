@@ -281,14 +281,34 @@ copy_quote_row:
     bx lr
 
 draw_deploy_choices:
+    push {r4,lr}
+    vpush {s16,s17}
+    mov r4,r0
+    vmov.f32 s16,s1
+    vmov.f32 s17,s2
     movs r3,#0
-    movt r3,#0x43e8 // 464, after the Confirm icon at 432
+    movt r3,#0x43fe // 508, clear of the visible Confirm icon
     vmov s0,r3
+    bl deploy_draw_left
+    // Seven CP932 glyphs in Confirm, plus the terminator and one pad byte.
+    adds r0,r4,#16
+    movs r1,#1
+    movs r2,#0
+    movs r3,#0
+    movt r3,#0x4434 // 720, clear of the visible Back icon
+    vmov s0,r3
+    vmov.f32 s1,s16
+    vmov.f32 s2,s17
+    bl deploy_draw_left
+    vpop {s16,s17}
+    pop {r4,pc}
+
+deploy_draw_left:
     b.w draw_raw_left
 
 draw_deploy_start:
     movs r3,#0
-    movt r3,#0x4334 // 180, after the Start icon at 142
+    movt r3,#0x436c // 236, clear of the visible Start icon
     vmov s0,r3
     b.w draw_raw_left
 

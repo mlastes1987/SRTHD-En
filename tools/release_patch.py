@@ -101,7 +101,8 @@ def main():
     from title_version import archive as stamp_title
     from cpk import Cpk, crilayla_decompress
     from gcm_texture import decode, encode
-    from status_tabs import reletter, report_and_level, upgrade_labels
+    from status_tabs import command_labels, reletter, report_and_level, upgrade_labels
+    from unit_list_banner import patch as unit_list_banner
 
     def texture_payload(archive, file_id):
         row = next(r for r in archive.files if int(r['FileName'].split('.')[0]) == file_id)
@@ -117,7 +118,10 @@ def main():
     menu_atlas = decode(menus)
     for box, label in upgrade_labels(args.label_font):
         menu_atlas.paste(label, box)
+    for box, label in command_labels(args.label_font):
+        menu_atlas.paste(label, box)
     extra = {
+        53: unit_list_banner(texture_payload(translated_archive, 53)),
         133: encode(menus, menu_atlas),
         134: encode(tabs, reletter(decode(tabs), args.label_font)),
         138: encode(notifications, report_and_level(decode(notifications), args.label_font)),

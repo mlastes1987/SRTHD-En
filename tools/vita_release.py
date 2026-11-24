@@ -54,6 +54,11 @@ That tool verifies supported file hashes, preserves original backups, and
 records the installed build for later upgrades.
 
 WHAT TO TEST
+Check the spacing between deployment button icons and their labels, the
+Unit List, Withdraw Unit, Spirit Commands and Enemy Roster headings, and
+the withdrawal confirmation. Check Giant Bazooka, Photon Engine, Reason
+and Valor in their menus.
+
 Check the intermission help bar, the Upgrade Unit and Upgrade Item headings,
 and the item preview and confirmation panels for Haro, Aiming Corrector,
 and other upgrades. Check the (End) label after clearing a map.

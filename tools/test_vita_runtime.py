@@ -6,7 +6,7 @@ import sys
 import unittest
 sys.path.insert(0,str(Path('work/vita/deps').resolve()))
 try:
-    from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB
+    from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE
     from unicorn.arm_const import *
     HAS_UNICORN=True
 except ImportError:
@@ -82,6 +82,36 @@ class RuntimeTests(unittest.TestCase):
         u.emu_start(self.labels[name]|1,end,count=2000)
         self.assertEqual(u.reg_read(UC_ARM_REG_PC),end)
         self.assertEqual(u.reg_read(UC_ARM_REG_SP),0x70010000)
+
+    def test_deployment_button_labels_get_independent_origins(self):
+        overrides = json.loads(FONT_METRICS.with_name('vita_text_overrides.json').read_text(encoding='utf8'))
+        for label, literal, expected in (
+            ('draw_deploy_choices', '0xd5250', [(508, 'Ｃｏｎｆｉｒｍ'), (720, 'Ｂａｃｋ')]),
+            ('draw_deploy_start', '0xd52c0', [(236, 'Ｄｅｐｌｏｙ')]),
+        ):
+            u=self.machine()
+            raw=overrides[literal]['english'].encode('cp932')+b'\0'
+            u.mem_write(0x70002000,raw)
+            u.mem_write(0x81009d18,b'\x70\x47') # bx lr
+            calls=[]
+            def capture(machine, address, size, state):
+                pointer=machine.reg_read(UC_ARM_REG_R0)
+                text=bytes(machine.mem_read(pointer,20)).split(b'\0',1)[0].decode('cp932')
+                calls.append((floating(machine.reg_read(UC_ARM_REG_S0)),text))
+                self.assertEqual(machine.reg_read(UC_ARM_REG_R1),1)
+                self.assertEqual(machine.reg_read(UC_ARM_REG_R2),0)
+                self.assertEqual(floating(machine.reg_read(UC_ARM_REG_S1)),85)
+                self.assertEqual(floating(machine.reg_read(UC_ARM_REG_S2)),36)
+                machine.reg_write(UC_ARM_REG_S1,bits(0))
+                machine.reg_write(UC_ARM_REG_S2,bits(0))
+            u.hook_add(UC_HOOK_CODE,capture,begin=0x81009d18,end=0x81009d18)
+            u.reg_write(UC_ARM_REG_R0,0x70002000)
+            u.reg_write(UC_ARM_REG_R1,1)
+            u.reg_write(UC_ARM_REG_R2,0)
+            u.reg_write(UC_ARM_REG_S1,bits(85))
+            u.reg_write(UC_ARM_REG_S2,bits(36))
+            self.call_worker(u,label)
+            self.assertEqual(calls,expected)
 
     def prepare_pages(self,u,base):
         raw='「First line\n　Second line\n　Third line\n　Last line」'.encode()

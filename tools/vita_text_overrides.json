@@ -967,9 +967,9 @@
   },
   "0xd5250": {
     "japanese": "　：決定　　　：戻る",
-    "english": "Ｃｏｎｆｉｒｍ　　　Ｂａｃｋ",
+    "english": "Ｃｏｎｆｉｒｍ\u0000\u0000Ｂａｃｋ",
     "output_encoding": "cp932",
-    "reason": "Raw deployment font input"
+    "reason": "Raw deployment font input: two independently positioned CP932 labels"
   },
   "0xd5270": {
     "japanese": "＜出撃選択＞　並び替えるユニットを指定します。　　　",

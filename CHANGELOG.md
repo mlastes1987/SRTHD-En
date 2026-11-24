@@ -4,9 +4,26 @@ This changelog covers packaged translation previews and public tooling.
 Earlier work is recorded under the first packaged preview and the development
 history below.
 
-The current previews are **PS3 0.1.10-preview** (NPJB00514 / RPCS3) and
-**Vita 0.1.11-vita-preview** (PCSG00260 / Vita3K). Check Discord for build
+The current previews are **PS3 0.1.11-preview** (NPJB00514 / RPCS3) and
+**Vita 0.1.12-vita-preview** (PCSG00260 / Vita3K). Check Discord for build
 availability and playtest feedback. [Join the project Discord](https://discord.gg/DwR2jxj5b)
+
+## PS3 0.1.11-preview / Vita 0.1.12-vita-preview — 2026-11-23
+
+- Restored Dom's full **Giant Bazooka** name and shortened the item label
+  **Photon Power Engine** to **Photon Engine** to clear the quantity column.
+  The pickup message uses the same item name.
+- Renamed the Hero spirit commands **Reson.** and **Blaze** to **Reason** and
+  **Valor**, including the corresponding combat diagnostics.
+- Kept the withdrawal confirmation's warning and reward in independent
+  centered rows. The reward still displays the actual item name.
+- Translated **Unit List**, **Withdraw Unit**, **Spirit Commands**,
+  **Free Spirit Commands**, and **Enemy Roster**. Unit List has its own atlas
+  region and draw pane, keeping it independent of the Withdraw sprite.
+- Gave **Deploy**, **Confirm**, and **Back** individual Vita coordinates
+  beside their button icons. A headless ARM test checks each label and origin.
+- Rebuilt and verified both playtest packages. The layout changes still
+  need in-game confirmation.
 
 ## PS3 0.1.10-preview / Vita 0.1.11-vita-preview — 2026-11-22
 

@@ -2,6 +2,7 @@
 import json
 from PIL import Image, ImageFilter
 from title_version import METRICS, line, load_font
+from unit_list_banner import UNIT_LIST_BOX
 
 TABS = (
     ((65, 10, 370, 69), 63, "Unit Stats", True),
@@ -41,14 +42,14 @@ def roster_label(font_path):
     return glowing_label("Ally Roster", (280, 64), font, metrics)
 
 
-def glowing_label(text, size, font, metrics):
+def glowing_label(text, size, font, metrics, glow_color=(120, 236, 251, 255)):
     mask = line(text, font, metrics, size=39)
     mask.thumbnail((size[0] - 18, size[1] - 16), Image.Resampling.LANCZOS)
     sprite = Image.new("RGBA", size)
     alpha = Image.new("L", sprite.size)
     alpha.paste(mask, ((sprite.width - mask.width) // 2, (sprite.height - mask.height) // 2))
     glow = alpha.filter(ImageFilter.GaussianBlur(4))
-    sprite.paste((120, 236, 251, 255), (0, 0, *sprite.size), glow)
+    sprite.paste(glow_color, (0, 0, *sprite.size), glow)
     sprite.paste((244, 253, 255, 255), (0, 0, *sprite.size), alpha)
     return sprite
 
@@ -58,6 +59,22 @@ def upgrade_labels(font_path):
     metrics = json.loads(METRICS.read_text())
     for top, text in ((576, "Upgrade Unit"), (640, "Upgrade Item")):
         yield (0, top, 512, top + 64), glowing_label(text, (512, 64), font, metrics)
+
+
+def command_labels(font_path):
+    font = load_font(font_path)
+    metrics = json.loads(METRICS.read_text())
+    labels = (
+        ((0, 256, 512, 320), "Spirit Commands", None),
+        ((0, 320, 512, 384), "Free Spirit Commands", None),
+        ((280, 384, 512, 448), "Enemy Roster", (251, 132, 132, 255)),
+        ((0, 704, 336, 768), "Withdraw Unit", None),
+        (UNIT_LIST_BOX, "Unit List", None),
+    )
+    for box, text, glow in labels:
+        size = (box[2] - box[0], box[3] - box[1])
+        colors = {} if glow is None else {"glow_color": glow}
+        yield box, glowing_label(text, size, font, metrics, **colors)
 
 
 def report_and_level(atlas, font_path):
